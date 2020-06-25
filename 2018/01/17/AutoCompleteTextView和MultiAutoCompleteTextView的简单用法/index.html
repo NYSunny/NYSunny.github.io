@@ -16,14 +16,14 @@
 <meta property="og:site_name" content="Johnny&#39;s Blog">
 <meta property="og:description" content="1.AutoCompleteTextView的基本用法1234567891011121314//待匹配的字符串private String[] res = new String[]&amp;#123;&quot;shanghai1&quot;, &quot;shanghai2&quot;, &quot;beijing1&quot;, &quot;beijing2&quot;, &quot;tianjin&quot;&amp;#125;;//创建适配器ArrayAdapter adapter = new Arr">
 <meta property="og:locale" content="CN">
-<meta property="og:image" content="https://github.com/NYSunny/imgs-1/raw/master/Auto基本用法.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/NYSunny/imgs-1/master/Auto%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95.jpg">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5231076-fc21255a8d7505c8.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5231076-2ee52a15b0ce6b6e.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2020-06-25T06:28:37.978Z">
+<meta property="og:updated_time" content="2020-06-25T06:48:24.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AutoCompleteTextView和MultiAutoCompleteTextView的简单用法">
 <meta name="twitter:description" content="1.AutoCompleteTextView的基本用法1234567891011121314//待匹配的字符串private String[] res = new String[]&amp;#123;&quot;shanghai1&quot;, &quot;shanghai2&quot;, &quot;beijing1&quot;, &quot;beijing2&quot;, &quot;tianjin&quot;&amp;#125;;//创建适配器ArrayAdapter adapter = new Arr">
-<meta name="twitter:image" content="https://github.com/NYSunny/imgs-1/raw/master/Auto基本用法.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/NYSunny/imgs-1/master/Auto%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95.jpg">
   
   
     <link rel="icon" href="/logo.png">
@@ -147,7 +147,7 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <p><img src="https://github.com/NYSunny/imgs-1/raw/master/Auto基本用法.png" alt="belle_1.jpg"></p>
+            <p><img src="https://raw.githubusercontent.com/NYSunny/imgs-1/master/Auto%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95.jpg" alt="belle_1.jpg"></p>
 <h4 id="1-AutoCompleteTextView的基本用法"><a href="#1-AutoCompleteTextView的基本用法" class="headerlink" title="1.AutoCompleteTextView的基本用法"></a>1.AutoCompleteTextView的基本用法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//待匹配的字符串</span></span><br><span class="line"><span class="keyword">private</span> String[] res = <span class="keyword">new</span> String[]&#123;<span class="string">"shanghai1"</span>, <span class="string">"shanghai2"</span>, <span class="string">"beijing1"</span>, <span class="string">"beijing2"</span>, <span class="string">"tianjin"</span>&#125;;</span><br><span class="line"><span class="comment">//创建适配器</span></span><br><span class="line">ArrayAdapter adapter = <span class="keyword">new</span> ArrayAdapter(<span class="keyword">this</span>, android.R.layout.simple_list_item_1, res);</span><br><span class="line"><span class="comment">/*将适配器绑定到AutoCompleteTextView</span></span><br><span class="line"><span class="comment">* 注意：在xml文件下的&lt;AutoCompleteTextView/&gt;标签下需要添加android:completionThreshold="3"属性值，</span></span><br><span class="line"><span class="comment">* 该属性值用于在文本框中输入到第几个字符开始匹配给定的字符串*/</span></span><br><span class="line"><span class="keyword">this</span>.binding.txtAutoComplete.setAdapter(adapter);</span><br><span class="line">&lt;AutoCompleteTextView</span><br><span class="line">    android:id=<span class="string">"@+id/txt_auto_complete"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">    android:completionThreshold=<span class="string">"3"</span></span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
 <p>效果图如下：</p>
 <div align="center"><br><img src="http://upload-images.jianshu.io/upload_images/5231076-fc21255a8d7505c8.gif?imageMogr2/auto-orient/strip" style="zoom:50%"><br></div>
@@ -160,7 +160,7 @@
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年06月25日 14:28</p>
+        <p>最后更新： 2020年06月25日 14:48</p>
         <p>原始链接： <a class="post-url" href="/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/" title="AutoCompleteTextView和MultiAutoCompleteTextView的简单用法">https://www.johnnyit.cn/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/</a></p>
         <footer>
             <a href="https://www.johnnyit.cn">
@@ -218,7 +218,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/&title=《AutoCompleteTextView和MultiAutoCompleteTextView的简单用法》 — Johnny's Blog&pic=https://github.com/NYSunny/imgs-1/raw/master/Auto基本用法.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/&title=《AutoCompleteTextView和MultiAutoCompleteTextView的简单用法》 — Johnny's Blog&pic=https://raw.githubusercontent.com/NYSunny/imgs-1/master/Auto%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>

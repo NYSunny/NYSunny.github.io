@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="Johnny&#39;s Blog">
 <meta property="og:description" content="一.前言怎么说，ArrayList的源码还是相对简单的，数据结构也不是特别复杂，那我们直接上代码分析，先从一个简单的应用开始讲起…注：本文的源码为JDK1.8 二.ArrayList的初始化ArrayList可以说是我们平常开发遇见的最多的一种集合类了，一般，我们都会这么使用：1234List&amp;lt;Person&amp;gt; persons = new ArrayList&amp;lt;&amp;gt;();//注">
 <meta property="og:locale" content="CN">
-<meta property="og:image" content="https://github.com/NYSunny/imgs-1/raw/master/ArrayList浅析.png">
-<meta property="og:updated_time" content="2020-06-25T06:28:14.738Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/NYSunny/imgs-1/master/ArrayList%E6%B5%85%E6%9E%90.jpg">
+<meta property="og:updated_time" content="2020-06-25T06:51:24.183Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ArrayList浅析">
 <meta name="twitter:description" content="一.前言怎么说，ArrayList的源码还是相对简单的，数据结构也不是特别复杂，那我们直接上代码分析，先从一个简单的应用开始讲起…注：本文的源码为JDK1.8 二.ArrayList的初始化ArrayList可以说是我们平常开发遇见的最多的一种集合类了，一般，我们都会这么使用：1234List&amp;lt;Person&amp;gt; persons = new ArrayList&amp;lt;&amp;gt;();//注">
-<meta name="twitter:image" content="https://github.com/NYSunny/imgs-1/raw/master/ArrayList浅析.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/NYSunny/imgs-1/master/ArrayList%E6%B5%85%E6%9E%90.jpg">
   
   
     <link rel="icon" href="/logo.png">
@@ -145,7 +145,7 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <p><img src="https://github.com/NYSunny/imgs-1/raw/master/ArrayList浅析.png" alt></p>
+            <p><img src="https://raw.githubusercontent.com/NYSunny/imgs-1/master/ArrayList%E6%B5%85%E6%9E%90.jpg" alt></p>
 <h4 id="一-前言"><a href="#一-前言" class="headerlink" title="一.前言"></a>一.前言</h4><p>怎么说，ArrayList的源码还是相对简单的，数据结构也不是特别复杂，那我们直接上代码分析，先从一个简单的应用开始讲起…<br>注：本文的源码为JDK1.8</p>
 <h4 id="二-ArrayList的初始化"><a href="#二-ArrayList的初始化" class="headerlink" title="二.ArrayList的初始化"></a>二.ArrayList的初始化</h4><p>ArrayList可以说是我们平常开发遇见的最多的一种集合类了，一般，我们都会这么使用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Person&gt; persons = <span class="keyword">new</span> ArrayList&lt;&gt;();<span class="comment">//注释1</span></span><br><span class="line">Person person = <span class="keyword">new</span> Person();</span><br><span class="line">persons.add(person);</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
 <p>注意到注释1了嘛，在这里我们会实例化一个ArrayList对象，在注释1处调用的是ArrayList的无参构造器，我们进入到ArrayList的源码中看看ArrayList究竟有几种构造器：</p>
@@ -205,7 +205,7 @@
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年06月25日 14:28</p>
+        <p>最后更新： 2020年06月25日 14:51</p>
         <p>原始链接： <a class="post-url" href="/2017/07/02/ArrayList浅析/" title="ArrayList浅析">https://www.johnnyit.cn/2017/07/02/ArrayList浅析/</a></p>
         <footer>
             <a href="https://www.johnnyit.cn">
@@ -263,7 +263,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2017/07/02/ArrayList浅析/&title=《ArrayList浅析》 — Johnny's Blog&pic=https://github.com/NYSunny/imgs-1/raw/master/ArrayList浅析.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2017/07/02/ArrayList浅析/&title=《ArrayList浅析》 — Johnny's Blog&pic=https://raw.githubusercontent.com/NYSunny/imgs-1/master/ArrayList%E6%B5%85%E6%9E%90.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
