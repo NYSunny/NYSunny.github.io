@@ -16,12 +16,13 @@
 <meta property="og:site_name" content="Johnny&#39;s Blog">
 <meta property="og:description" content="1.概览类与类之间大体分为五种关系，分别为依赖关系，关联关系，聚合关系，组合关系以及继承关系。  2. 依赖关系依赖关系是单向的，表示一个类依赖于另一个类的定义，是“use a”的关系，如果A依赖于B，则B表现为A的局部变量，方法参数，静态方法调用等。 1234567891011121314public class Person&amp;#123;  public void doSomething1()&amp;">
 <meta property="og:locale" content="CN">
+<meta property="og:image" content="https://wx1.sbimg.cn/2020/06/25/UML.png">
 <meta property="og:image" content="https://github.com/NYSunny/imgs-1/raw/master/UML类图关系.png">
-<meta property="og:updated_time" content="2020-06-25T06:21:29.773Z">
+<meta property="og:updated_time" content="2020-06-25T08:47:32.990Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java UML类图关系说明">
 <meta name="twitter:description" content="1.概览类与类之间大体分为五种关系，分别为依赖关系，关联关系，聚合关系，组合关系以及继承关系。  2. 依赖关系依赖关系是单向的，表示一个类依赖于另一个类的定义，是“use a”的关系，如果A依赖于B，则B表现为A的局部变量，方法参数，静态方法调用等。 1234567891011121314public class Person&amp;#123;  public void doSomething1()&amp;">
-<meta name="twitter:image" content="https://github.com/NYSunny/imgs-1/raw/master/UML类图关系.png">
+<meta name="twitter:image" content="https://wx1.sbimg.cn/2020/06/25/UML.png">
   
   
     <link rel="icon" href="/logo.png">
@@ -146,7 +147,7 @@
       
             
             <h3 id="1-概览"><a href="#1-概览" class="headerlink" title="1.概览"></a>1.概览</h3><p>类与类之间大体分为五种关系，分别为依赖关系，关联关系，聚合关系，组合关系以及继承关系。</p>
-<p><img src="https://github.com/NYSunny/imgs-1/raw/master/UML类图关系.png" alt="UML类图关系.png"></p>
+<p><img src="https://wx1.sbimg.cn/2020/06/25/UML.png" alt="UML.png"><img src="https://github.com/NYSunny/imgs-1/raw/master/UML类图关系.png" alt="UML类图关系.png"></p>
 <h3 id="2-依赖关系"><a href="#2-依赖关系" class="headerlink" title="2. 依赖关系"></a>2. 依赖关系</h3><p>依赖关系是单向的，表示一个类依赖于另一个类的定义，是“use a”的关系，如果A依赖于B，则B表现为A的局部变量，方法参数，静态方法调用等。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Car car = <span class="keyword">new</span> Car();<span class="comment">//局部变量</span></span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething2</span><span class="params">(Car car)</span></span>&#123;<span class="comment">//方法参数</span></span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething3</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> price = Car.<span class="keyword">do</span>();<span class="comment">//静态方法调用</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="3-关联关系"><a href="#3-关联关系" class="headerlink" title="3. 关联关系"></a>3. 关联关系</h3><p>单向或者双向的关系，通常我们应该避免双向关联关系，它是一种”has a“的关系。如果A单向关联B，则A has a B，一般类中的表现为全局变量。</p>
@@ -160,7 +161,7 @@
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年06月25日 14:21</p>
+        <p>最后更新： 2020年06月25日 16:47</p>
         <p>原始链接： <a class="post-url" href="/2018/03/30/Java UML类图关系说明/" title="Java UML类图关系说明">https://www.johnnyit.cn/2018/03/30/Java UML类图关系说明/</a></p>
         <footer>
             <a href="https://www.johnnyit.cn">
@@ -218,7 +219,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2018/03/30/Java UML类图关系说明/&title=《Java UML类图关系说明》 — Johnny's Blog&pic=https://github.com/NYSunny/imgs-1/raw/master/UML类图关系.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2018/03/30/Java UML类图关系说明/&title=《Java UML类图关系说明》 — Johnny's Blog&pic=https://wx1.sbimg.cn/2020/06/25/UML.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
