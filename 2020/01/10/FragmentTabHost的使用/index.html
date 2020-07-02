@@ -3,24 +3,24 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>android主页面搭建之FragmentTabHost | Johnny&#39;s Blog</title>
+  <title>FragmentTabHost的使用 | Johnny&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="Android技术博客,Android,个人博客">
   
-  <meta name="description" content="Android主页面搭建之FragmentTabHost前言现在很多APP的主页面都采用底部页签的形式构建，点击不同的底部标签能够在当前页面显示不同内容，实现的手段有很多种，今天我们来说一说使用FragmentTabHost+Fragment构建底部页签和页面内容。 思考开始之前，我们先来思考一下，如果我们不使用FragmentTabHost构建主页面，那么这样的效果该怎么实现呢？ 可能会想到不">
-<meta name="keywords" content="FragmentTabHost,android控件">
+  <meta name="description" content="FragmentTabHost的使用前言现在很多APP的主页面都采用底部页签的样式，点击不同的底部标签能够在当前页面显示不同内容，实现的手段有很多种，今天我们来说一说使用FragmentTabHost+Fragment构建底部页签和页面内容。 思考开始之前，我们先来思考一下，如果我们不使用FragmentTabHost构建主页面，那么这样的效果该怎么实现呢？ 可能会想到不同页签对应的页面可以使用">
+<meta name="keywords" content="android控件,FragmentTabHost">
 <meta property="og:type" content="article">
-<meta property="og:title" content="android主页面搭建之FragmentTabHost">
+<meta property="og:title" content="FragmentTabHost的使用">
 <meta property="og:url" content="https://www.johnnyit.cn/2020/01/10/FragmentTabHost的使用/index.html">
 <meta property="og:site_name" content="Johnny&#39;s Blog">
-<meta property="og:description" content="Android主页面搭建之FragmentTabHost前言现在很多APP的主页面都采用底部页签的形式构建，点击不同的底部标签能够在当前页面显示不同内容，实现的手段有很多种，今天我们来说一说使用FragmentTabHost+Fragment构建底部页签和页面内容。 思考开始之前，我们先来思考一下，如果我们不使用FragmentTabHost构建主页面，那么这样的效果该怎么实现呢？ 可能会想到不">
+<meta property="og:description" content="FragmentTabHost的使用前言现在很多APP的主页面都采用底部页签的样式，点击不同的底部标签能够在当前页面显示不同内容，实现的手段有很多种，今天我们来说一说使用FragmentTabHost+Fragment构建底部页签和页面内容。 思考开始之前，我们先来思考一下，如果我们不使用FragmentTabHost构建主页面，那么这样的效果该怎么实现呢？ 可能会想到不同页签对应的页面可以使用">
 <meta property="og:locale" content="CN">
 <meta property="og:image" content="https://wx2.sbimg.cn/2020/06/29/2LXxD.png">
-<meta property="og:updated_time" content="2020-06-29T10:16:25.159Z">
+<meta property="og:updated_time" content="2020-07-02T08:18:25.175Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android主页面搭建之FragmentTabHost">
-<meta name="twitter:description" content="Android主页面搭建之FragmentTabHost前言现在很多APP的主页面都采用底部页签的形式构建，点击不同的底部标签能够在当前页面显示不同内容，实现的手段有很多种，今天我们来说一说使用FragmentTabHost+Fragment构建底部页签和页面内容。 思考开始之前，我们先来思考一下，如果我们不使用FragmentTabHost构建主页面，那么这样的效果该怎么实现呢？ 可能会想到不">
+<meta name="twitter:title" content="FragmentTabHost的使用">
+<meta name="twitter:description" content="FragmentTabHost的使用前言现在很多APP的主页面都采用底部页签的样式，点击不同的底部标签能够在当前页面显示不同内容，实现的手段有很多种，今天我们来说一说使用FragmentTabHost+Fragment构建底部页签和页面内容。 思考开始之前，我们先来思考一下，如果我们不使用FragmentTabHost构建主页面，那么这样的效果该怎么实现呢？ 可能会想到不同页签对应的页面可以使用">
 <meta name="twitter:image" content="https://wx2.sbimg.cn/2020/06/29/2LXxD.png">
   
   
@@ -116,7 +116,7 @@
         
   
     <h1 class="post-title" itemprop="name">
-      android主页面搭建之FragmentTabHost
+      FragmentTabHost的使用
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -146,20 +146,21 @@
       
             
             <p><img src="https://wx2.sbimg.cn/2020/06/29/2LXxD.png" alt="FragmentTabHost"></p>
-<h1 id="Android主页面搭建之FragmentTabHost"><a href="#Android主页面搭建之FragmentTabHost" class="headerlink" title="Android主页面搭建之FragmentTabHost"></a>Android主页面搭建之FragmentTabHost</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>现在很多APP的主页面都采用底部页签的形式构建，点击不同的底部标签能够在当前页面显示不同内容，实现的手段有很多种，今天我们来说一说使用<code>FragmentTabHost</code>+<code>Fragment</code>构建底部页签和页面内容。</p>
+<h1 id="FragmentTabHost的使用"><a href="#FragmentTabHost的使用" class="headerlink" title="FragmentTabHost的使用"></a>FragmentTabHost的使用</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>现在很多APP的主页面都采用底部页签的样式，点击不同的底部标签能够在当前页面显示不同内容，实现的手段有很多种，今天我们来说一说使用<code>FragmentTabHost</code>+<code>Fragment</code>构建底部页签和页面内容。</p>
 <h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>开始之前，我们先来思考一下，如果我们不使用<code>FragmentTabHost</code>构建主页面，那么这样的效果该怎么实现呢？</p>
-<p>可能会想到不同页签对应的页面可以使用不同的<code>Fragment</code>，也就是需要一个<code>FrameLayout</code>来装这些<code>Fragment</code>，这样，主页面的布局就是上面一大部分是一个大大的<code>FrameLayout</code>，底部因为需要显示不同的页签，这个页签是横向排列的，而且一般是等分的，这就可以使用<code>LinearLayout</code>来实现了，每个页签里面可能会显示图片和文字，图片和文字可能还会有选中状态，我们可以在点击到哪个页签时，再设置哪个页签的选中状态，然后切换不同的<code>Fragment</code>…</p>
+<p>可能会想到不同页签对应的页面可以使用不同的<code>Fragment</code>，也就是需要一个<code>FrameLayout</code>来装这些<code>Fragment</code>，这样，主页面的布局就是上面一大部分是一个大大的<code>FrameLayout</code>，底部因为需要显示不同的页签，页签是横向排列的，而且一般是等分的，这就可以使用<code>LinearLayout</code>来实现了，每个页签里面可能会显示图片和文字，图片和文字可能还会有选中状态，我们可以在点击到哪个页签时，再设置哪个页签的选中状态，然后切换不同的<code>Fragment</code>…</p>
 <p>这可能是我们第一时间想到的最简单的实现方案，接下来我们来看一看<code>FragmentTabHost</code>，看看它和我们想的“最简单实现方案”有什么不同？</p>
 <h2 id="使用FragmentTabHost"><a href="#使用FragmentTabHost" class="headerlink" title="使用FragmentTabHost"></a>使用FragmentTabHost</h2><p>如果你使用<code>androidx</code>，它位于<code>androidx.fragment.app</code>包下，如果不使用<code>androidx</code>，那么它位于android support包中，这标志着你需要引入android support包的依赖，可以是v4包，也可以是v13包…</p>
 <p>不过在<code>androidx</code>和<code>support-v13</code>包中，<code>FragmentTabHost</code>类都被标记为了废弃，官方不建议我们使用它了，但是不妨碍我们对它的学习，后续我们可以借鉴它的实现思路或者代码封装我们自己的<code>FragmentTabHost</code>（因为原生的<code>FragmentTabHost</code>可能满足不了我们的需求）。</p>
 <h3 id="构建布局文件"><a href="#构建布局文件" class="headerlink" title="构建布局文件"></a>构建布局文件</h3><p>开发页面的第一步一般都是构建布局文件，我们来看看使用<code>FragmentTabHost</code>的主页面布局文件是什么样的？</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.fragment.app.FragmentTabHost</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/container"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">".MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--Fragment显示区域，注意它的id--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">FrameLayout</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">"@android:id/tabcontent"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">"0dp"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--内容和底部标签分割线--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">View</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">"1px"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:background</span>=<span class="string">"@color/colorPrimary"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--底部页签显示区域，注意它的id--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">TabWidget</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">"@android:id/tabs"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.fragment.app.FragmentTabHost</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上面的布局文件中，我们使用<code>FragmentTabHost</code>来做根布局，由于<code>FragmentTabHost</code>继承自<code>TabHost</code>，<code>TabHost</code>又继承自<code>FrameLayout</code>，我们不能把子View直接放在它里面，这会造成布局的遮挡，所以我们使用了<code>LinearLayout</code>，把它设置成竖直方向排列，里面用<code>FrameLayout</code>来显示<code>Fragment</code>，用<code>TabWidget</code>显示底部页签。需要注意两点：</p>
+<p>上面的布局文件中，我们使用<code>FragmentTabHost</code>来做根布局，由于<code>FragmentTabHost</code>继承自<code>TabHost</code>，<code>TabHost</code>又继承自<code>FrameLayout</code>，所以我们不能把子View直接放在它里面，这会造成布局的遮挡，这里我们使用了<code>LinearLayout</code>，把它设置成竖直方向排列，里面用<code>FrameLayout</code>来显示<code>Fragment</code>，用<code>TabWidget</code>显示底部页签。需要注意两点：</p>
 <ul>
 <li>显示<code>Fragment</code>的<code>FrameLayout</code>的id是<code>@android:id/tabcontent</code>；</li>
 <li>显示底部页签的<code>TabWidget</code>id是<code>@android:id/tabs</code>。</li>
 </ul>
-<p>要想使用<code>FragmentTabHost</code>，就必须使用这两个系统定义的id，不然程序会crash，因为在<code>TabHost</code>中会通过<code>findViewById</code>找到这两个View，找不到的话会抛出异常。</p>
+<p>要想使用<code>FragmentTabHost</code>，就必须使用这两个系统定义的id，不然程序会crash，因为在<code>TabHost</code>中会通过<code>findViewById</code>找这两个View，找不到的话会抛出异常。</p>
+<p>从布局上看我们发现这跟我们前面想的“最简单实现方案”有些相似，确实，<code>FragmentTabHost</code>就是这种思路的封装实现。</p>
 <h3 id="初始化FragmentTabHost"><a href="#初始化FragmentTabHost" class="headerlink" title="初始化FragmentTabHost"></a>初始化FragmentTabHost</h3><p>完成布局文件之后，我们就需要在代码中设置<code>FragmentTabHost</code>了：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 内容 */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> fragments = arrayOf(</span><br><span class="line">   StarFragment::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>,<span class="type"></span></span></span><br><span class="line">   PlazaFragment::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>,<span class="type"></span></span></span><br><span class="line">   ChatFragment::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>,<span class="type"></span></span></span><br><span class="line">   MeFragment::<span class="class"><span class="keyword">class</span>.<span class="title">java</span></span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// container是FragmentTabHost，初始化FragmentTabHost</span></span><br><span class="line">container.setup(<span class="keyword">this</span>, supportFragmentManager, android.R.id.tabcontent)</span><br><span class="line"><span class="keyword">for</span> (index <span class="keyword">in</span> fragments.indices) &#123;</span><br><span class="line">   <span class="keyword">val</span> tabSpec = container.newTabSpec(index.toString())</span><br><span class="line">   <span class="comment">// 设置底部标签View</span></span><br><span class="line">   tabSpec.setIndicator(provideTabView(index))</span><br><span class="line">   <span class="comment">// FragmentTabHost添加Context和TabSpec</span></span><br><span class="line">   container.addTab(tabSpec, fragments[index], <span class="literal">null</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们来逐行分析上面这段初始化<code>FragmentTabHost</code>的代码…</p>
@@ -185,8 +186,8 @@
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年06月29日 18:16</p>
-        <p>原始链接： <a class="post-url" href="/2020/01/10/FragmentTabHost的使用/" title="android主页面搭建之FragmentTabHost">https://www.johnnyit.cn/2020/01/10/FragmentTabHost的使用/</a></p>
+        <p>最后更新： 2020年07月02日 16:18</p>
+        <p>原始链接： <a class="post-url" href="/2020/01/10/FragmentTabHost的使用/" title="FragmentTabHost的使用">https://www.johnnyit.cn/2020/01/10/FragmentTabHost的使用/</a></p>
         <footer>
             <a href="https://www.johnnyit.cn">
                 <img src="/images/logo.png" alt="Johnny">
@@ -243,7 +244,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2020/01/10/FragmentTabHost的使用/&title=《android主页面搭建之FragmentTabHost》 — Johnny's Blog&pic=https://wx2.sbimg.cn/2020/06/29/2LXxD.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2020/01/10/FragmentTabHost的使用/&title=《FragmentTabHost的使用》 — Johnny's Blog&pic=https://wx2.sbimg.cn/2020/06/29/2LXxD.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -253,7 +254,7 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.johnnyit.cn/2020/01/10/FragmentTabHost的使用/&title=《android主页面搭建之FragmentTabHost》 — Johnny's Blog&source=Android技术博客" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.johnnyit.cn/2020/01/10/FragmentTabHost的使用/&title=《FragmentTabHost的使用》 — Johnny's Blog&source=Android技术博客" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
@@ -263,7 +264,7 @@
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《android主页面搭建之FragmentTabHost》 — Johnny's Blog&url=https://www.johnnyit.cn/2020/01/10/FragmentTabHost的使用/&via=https://www.johnnyit.cn" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《FragmentTabHost的使用》 — Johnny's Blog&url=https://www.johnnyit.cn/2020/01/10/FragmentTabHost的使用/&via=https://www.johnnyit.cn" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -290,9 +291,9 @@
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/FragmentTabHost/" class="color1">FragmentTabHost</a>
-      
     <a href="/tags/android控件/" class="color5">android控件</a>
+      
+    <a href="/tags/FragmentTabHost/" class="color1">FragmentTabHost</a>
       
   </li>
 
@@ -305,12 +306,22 @@
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android主页面搭建之FragmentTabHost"><span class="post-toc-text">Android主页面搭建之FragmentTabHost</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思考"><span class="post-toc-text">思考</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用FragmentTabHost"><span class="post-toc-text">使用FragmentTabHost</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#构建布局文件"><span class="post-toc-text">构建布局文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初始化FragmentTabHost"><span class="post-toc-text">初始化FragmentTabHost</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#FragmentTabHost的使用"><span class="post-toc-text">FragmentTabHost的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思考"><span class="post-toc-text">思考</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用FragmentTabHost"><span class="post-toc-text">使用FragmentTabHost</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#构建布局文件"><span class="post-toc-text">构建布局文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初始化FragmentTabHost"><span class="post-toc-text">初始化FragmentTabHost</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
+  
+    <a href="/2020/01/15/Android开发实践之通用Dialog封装/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          Android开发实践之通用Dialog封装
+        
+      </span>
+    </a>
   
   
     <a href="/2019/05/26/EventBus使用/" id="article-nav-older" class="article-nav-link-wrap">
@@ -379,7 +390,7 @@
             <a class="category-link" href="/categories/Android第三方库使用/">Android第三方库使用</a><a class="category-link" href="/categories/AutoCompleteTextView/">AutoCompleteTextView</a><a class="category-link" href="/categories/Hexo/">Hexo</a><a class="category-link" href="/categories/Java基础/">Java基础</a><a class="category-link" href="/categories/android/">android</a><a class="category-link" href="/categories/android控件使用/">android控件使用</a>
         </div>
         <div id="sidebar-menu-box-tags">
-            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 10px;">android控件</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 15px;">android控件</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
         </div>
     </div>
     <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
@@ -412,7 +423,7 @@
     <div class="mobile-header-tag-container">
         <span class="title">Tags</span>
         <div id="mobile-header-container-tags">
-            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 10px;">android控件</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 15px;">android控件</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
         </div>
     </div>
 </div>
