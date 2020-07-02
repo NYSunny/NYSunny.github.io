@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Android源码之下载编译导入AS（Mac版） | Johnny&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Android技术博客,Android,个人博客">
+  
+  <meta name="description" content="Android源码之下载编译导入AS（Mac版）AOSP源码下载和编译环境准备官方指南： 要求 搭建编译环境 推荐准备250G可用磁盘空间。 创建分区大小写的磁盘映像Mac OS默认会在不区分大小写的文件系统中运行，但由于Git并不支持此类文件系统，所以需要在Mac OS上建立一个区分大小写的磁盘分区。我们这里使用命令行来创建，一是比较方便，二是后期可扩展。 您可以使用磁盘映像在现有的 Mac">
+<meta name="keywords" content="android源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android源码之下载编译导入AS（Mac版）">
+<meta property="og:url" content="https://www.johnnyit.cn/2020/01/25/Mac上Android源码下载编译导入AS教程/index.html">
+<meta property="og:site_name" content="Johnny&#39;s Blog">
+<meta property="og:description" content="Android源码之下载编译导入AS（Mac版）AOSP源码下载和编译环境准备官方指南： 要求 搭建编译环境 推荐准备250G可用磁盘空间。 创建分区大小写的磁盘映像Mac OS默认会在不区分大小写的文件系统中运行，但由于Git并不支持此类文件系统，所以需要在Mac OS上建立一个区分大小写的磁盘分区。我们这里使用命令行来创建，一是比较方便，二是后期可扩展。 您可以使用磁盘映像在现有的 Mac">
+<meta property="og:locale" content="CN">
+<meta property="og:image" content="https://wx1.sbimg.cn/2020/07/02/2aHH6.png">
+<meta property="og:image" content="https://wx1.sbimg.cn/2020/07/02/2aYoe.png">
+<meta property="og:image" content="https://wx2.sbimg.cn/2020/07/02/2aZqD.png">
+<meta property="og:image" content="https://wx1.sbimg.cn/2020/07/02/2aaEN.png">
+<meta property="og:image" content="https://wx2.sbimg.cn/2020/07/02/2aUkj.png">
+<meta property="og:image" content="https://wx1.sbimg.cn/2020/07/02/2aisk.png">
+<meta property="og:updated_time" content="2020-07-02T11:13:53.145Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android源码之下载编译导入AS（Mac版）">
+<meta name="twitter:description" content="Android源码之下载编译导入AS（Mac版）AOSP源码下载和编译环境准备官方指南： 要求 搭建编译环境 推荐准备250G可用磁盘空间。 创建分区大小写的磁盘映像Mac OS默认会在不区分大小写的文件系统中运行，但由于Git并不支持此类文件系统，所以需要在Mac OS上建立一个区分大小写的磁盘分区。我们这里使用命令行来创建，一是比较方便，二是后期可扩展。 您可以使用磁盘映像在现有的 Mac">
+<meta name="twitter:image" content="https://wx1.sbimg.cn/2020/07/02/2aHH6.png">
+  
+  
+    <link rel="icon" href="/logo.png">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Johnny&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Johnny&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        Android技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Sunny" target="_blank" href="//www.johnnyit.cn">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/NYSunny">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//weibo.com/u/5492265182/home?wvr=5">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-Mac上Android源码下载编译导入AS教程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Android源码之下载编译导入AS（Mac版）
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/android源码/">android源码</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-01-25
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p><img src="https://wx1.sbimg.cn/2020/07/02/2aHH6.png" alt></p>
+<h1 id="Android源码之下载编译导入AS（Mac版）"><a href="#Android源码之下载编译导入AS（Mac版）" class="headerlink" title="Android源码之下载编译导入AS（Mac版）"></a>Android源码之下载编译导入AS（Mac版）</h1><h2 id="AOSP源码下载和编译"><a href="#AOSP源码下载和编译" class="headerlink" title="AOSP源码下载和编译"></a>AOSP源码下载和编译</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>官方指南：</p>
+<p><a href="https://source.android.com/source/requirements" target="_blank" rel="noopener">要求</a></p>
+<p><a href="https://source.android.com/source/initializing" target="_blank" rel="noopener">搭建编译环境</a></p>
+<p>推荐准备250G可用磁盘空间。</p>
+<h4 id="创建分区大小写的磁盘映像"><a href="#创建分区大小写的磁盘映像" class="headerlink" title="创建分区大小写的磁盘映像"></a>创建分区大小写的磁盘映像</h4><p>Mac OS默认会在不区分大小写的文件系统中运行，但由于Git并不支持此类文件系统，所以需要在Mac OS上建立一个区分大小写的磁盘分区。我们这里使用命令行来创建，一是比较方便，二是后期可扩展。</p>
+<p>您可以使用磁盘映像在现有的 Mac OS 环境中创建区分大小写的文件系统。要创建磁盘映像，请启动磁盘工具，然后选择“新建映像”。这里推荐准备250G的磁盘空间；更大的空间能够更好地满足未来的需求。使用<strong>稀疏映像</strong>有助于节省空间，而且以后可以随着需求的增加进行扩展。请务必选择“Case sensitive, Journaled”存储卷格式。</p>
+<p>您也可以通过 shell 使用以下命令创建磁盘映像：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdiutil create -type SPARSE -fs &apos;Case-sensitive Journaled HFS+&apos; -size 250g ~/android.dmg</span><br></pre></td></tr></table></figure>
+<p>这将创建一个 <code>.dmg</code>（也可能是 <code>.dmg.sparseimage</code>）文件，该文件在装载后可用作具有 Android 开发所需格式的存储卷。</p>
+<p>如果您以后需要更大的存储卷，还可以使用以下命令来调整稀疏映像的大小：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdiutil resize -size &lt;new-size-you-want&gt;g ~/android.dmg.sparseimage</span><br></pre></td></tr></table></figure>
+<p>比如需要把250G调整成300G：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdiutil resize -size 300g ~/android.dmg.sparseimage</span><br></pre></td></tr></table></figure>
+<p><strong>注意：调整分区大小的命令，需要在该分区磁盘映像已卸载的情况下才能生效。</strong></p>
+<h4 id="添加装载和卸载磁盘分区的命令和函数"><a href="#添加装载和卸载磁盘分区的命令和函数" class="headerlink" title="添加装载和卸载磁盘分区的命令和函数"></a>添加装载和卸载磁盘分区的命令和函数</h4><p>对于存储在当前用户目录下的名为 <code>android.dmg</code> 的磁盘映像，您可以向 <code>~/.bash_profile</code> 中添加辅助函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># mount the android file image</span><br><span class="line">function mountAndroid &#123; hdiutil attach ~/android.dmg -mountpoint /Volumes/android; &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：如果系统创建的是 <code>.dmg.sparseimage</code> 文件，请将 <code>~/android.dmg</code> 替换成 <code>~/android.dmg.sparseimage</code>。</p>
+<p>需要装载分区磁盘映像时，执行如下命令即可，装载路径为<code>/Volumes/android</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mountAndroid</span><br></pre></td></tr></table></figure>
+<p>同样，卸载的函数如下，我们也将它添加到<code>~/.bash_profile</code>文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># unmount the android file image</span><br><span class="line">function umountAndroid() &#123; hdiutil detach /Volumes/android; &#125;</span><br></pre></td></tr></table></figure>
+<p>执行如下命令，便可卸载该分区磁盘映像：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ umountAndroid</span><br></pre></td></tr></table></figure>
+<h4 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h4><p>如果Mac已经安装JDK且配好了环境变量，可省略这步。</p>
+<p>要查看在开发各种 Android 版本时要使用的 Java 版本，请参阅相关<a href="https://source.android.com/source/requirements" target="_blank" rel="noopener">要求</a>。</p>
+<h4 id="安装Xcode和其他软件包"><a href="#安装Xcode和其他软件包" class="headerlink" title="安装Xcode和其他软件包"></a>安装Xcode和其他软件包</h4><p>1.安装Xcode命令行工具：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ xcode-select --install</span><br></pre></td></tr></table></figure>
+<p>2.安装Xcode，直接在AppStore里安装即可。</p>
+<p>3.安装<a href="http://www.macports.org/install.php" target="_blank" rel="noopener">MacPorts</a>或<a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a>，MacPorts和Homebrew是软件包管理工具，可用来直接在终端里安装、更新和卸载软件包。建议二者都安装，笔者在通过MacPorts安装gnupg时死活装不上，最后通过Homebrew安装成功，如果网页访问不了，请翻墙。</p>
+<p>4.在<code>~/.bash_profile</code>文件中导入路径，就可以使用port或brew命令来管理软件包了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/opt/local/bin:$PATH</span><br><span class="line">export PATH=/usr/local/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>5.安装gmake、libsdl、git和gnupg</p>
+<ul>
+<li>如果是使用MacPorts，则执行如下命令：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ POSIXLY_CORRECT=1 sudo port install gmake libsdl git gnupg</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果是使用Homebrew，则执行如下命令：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install gmake libsdl git gnupg2</span><br></pre></td></tr></table></figure>
+<h4 id="设置文件描述符数量上限"><a href="#设置文件描述符数量上限" class="headerlink" title="设置文件描述符数量上限"></a>设置文件描述符数量上限</h4><p>在 Mac OS 中，可同时打开的文件描述符的默认数量上限太低，在高度并行的编译流程中，可能会超出此上限。要提高此上限，请将下列行添加到 <code>~/.bash_profile</code> 中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># set the number of open files to be 1024</span><br><span class="line">ulimit -S -n 1024</span><br></pre></td></tr></table></figure>
+<p>至此，一切准备工作就绪，接下来就是下载源码了。</p>
+<h3 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h3><p><a href="https://source.android.com/setup/build/downloading" target="_blank" rel="noopener">官方教程</a>，由于有墙的原因，下载过程中可能会出现各种问题，这里推荐使用<a href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/" target="_blank" rel="noopener">清华大学镜像站</a>来下载。</p>
+<h4 id="下载安装Repo工具"><a href="#下载安装Repo工具" class="headerlink" title="下载安装Repo工具"></a>下载安装Repo工具</h4><p>由于Android源码庞大复杂，所以Google专门开发了Repo来管理Android源码库，这里不多作介绍，有兴趣可自行阅读<a href="https://source.android.com/source/developing.html" target="_blank" rel="noopener">repo工具介绍</a>。</p>
+<p>按照官方建议，首先在用户主目录下有一个 <code>bin/</code> 目录，并且将该目录包含在路径中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir ~/bin</span><br><span class="line">$ PATH=~/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>然后下载Repo工具，并确保它可执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl https://mirrors.tuna.tsinghua.edu.cn/git/git-repo &gt; ~/bin/repo</span><br><span class="line">$ chmod a+x ~/bin/repo</span><br></pre></td></tr></table></figure>
+<h4 id="初始化Repo客户端"><a href="#初始化Repo客户端" class="headerlink" title="初始化Repo客户端"></a>初始化Repo客户端</h4><p>在前面，我们通过<code>mountAndroid</code>命令装载了我们分区后的磁盘映像，其装载路径为<code>/Volumes/android</code>，所以我们需要在该目录下进行初始化，切换到该目录下，并且创建一个<code>aosp</code>的工作目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd /Volumes/android/</span><br><span class="line">$ mkdir aosp</span><br><span class="line">$ cd aosp</span><br></pre></td></tr></table></figure>
+<p>现在，我们的源码根目录全路径为<code>/Volumes/android/aosp</code>。</p>
+<p>Repo的运行过程中会尝试访问官方的git源更新自己，如果想使用清华的镜像源进行更新，可以将如下内容复制到你的<code>~/.bashrc</code>(没有该文件则创建一个)里：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export REPO_URL=&apos;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&apos;</span><br></pre></td></tr></table></figure>
+<p>然后配置git，需要姓名和邮箱(如果已经配置过，不需要再配置)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;Your Name&quot;</span><br><span class="line">$ git config --global user.email &quot;you@example.com&quot;</span><br></pre></td></tr></table></figure>
+<p>运行<code>repo init</code>来初始化<code>master</code>分支：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ repo init -u https://aosp.tuna.tsinghua.edu.cn/platform/manifest</span><br></pre></td></tr></table></figure>
+<p>要对<code>master</code>以外的分支进行校验，请使用 <code>-b</code> 来指定相应分支。要查看分支列表，请参阅源<a href="https://source.android.com/setup/start/build-numbers#source-code-tags-and-builds" target="_blank" rel="noopener">代码标记和版本</a>，笔者这里指定的是<code>android-9.0.0_r35</code>分支：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ repo init -u https://aosp.tuna.tsinghua.edu.cn/platform/manifest -b android-9.0.0_r35</span><br></pre></td></tr></table></figure>
+<h4 id="下载源代码"><a href="#下载源代码" class="headerlink" title="下载源代码"></a>下载源代码</h4><p>在终端进入<code>/Volumes/android/aosp</code>源码根目录下，输入下面命令来同步代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ repo sync</span><br></pre></td></tr></table></figure>
+<p>下载源代码的过程很漫长，期间可能会因为网络等原因，导致下载出错，因为repo同步支持断点续传，所以这里推荐使用shell脚本下载：</p>
+<p>在源码根目录下创建一个<code>reposync.sh</code>脚本文件，脚本内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash   </span><br><span class="line">#FileName  reposync.sh  </span><br><span class="line">PATH=~/bin:$PATH   </span><br><span class="line">repo init -u https://aosp.tuna.tsinghua.edu.cn/platform/manifest -b android-9.0.0_r35</span><br><span class="line">repo sync   </span><br><span class="line">while [ $? = 1 ]; do   </span><br><span class="line">echo &quot;================sync failed, re-sync again =====&quot;   </span><br><span class="line">sleep 3   </span><br><span class="line">repo sync   </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>保存好后，在源码根目录下的执行下面命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./reposync.sh</span><br></pre></td></tr></table></figure>
+<p>这样就开始下载了，等待…</p>
+<p>由于下载过程漫长，建议将Mac节能设置成防止进入睡眠。</p>
+<p>当下载完成会提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Syncing work tree: 100%(xxx/xxx), done.</span><br></pre></td></tr></table></figure>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>编译命令还是在源码根目录下进行：<code>/Volumes/android/aosp</code></p>
+<h4 id="初始化编译环境"><a href="#初始化编译环境" class="headerlink" title="初始化编译环境"></a>初始化编译环境</h4><p>使用<code>envsetup.sh</code>脚本初始化环境：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ source build/envsetup.sh</span><br></pre></td></tr></table></figure>
+<h4 id="选择编译目标"><a href="#选择编译目标" class="headerlink" title="选择编译目标"></a>选择编译目标</h4><p>使用<code>lunch</code>选择编译目标：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">$ lunch </span><br><span class="line"></span><br><span class="line">You&apos;re building on Darwin</span><br><span class="line"></span><br><span class="line">Lunch menu... pick a combo:</span><br><span class="line">     1. aosp_arm-eng</span><br><span class="line">     2. aosp_arm64-eng</span><br><span class="line">     3. aosp_mips-eng</span><br><span class="line">     4. aosp_mips64-eng</span><br><span class="line">     5. aosp_x86-eng</span><br><span class="line">     6. aosp_x86_64-eng</span><br><span class="line">     7. aosp_car_arm-userdebug</span><br><span class="line">     8. aosp_car_arm64-userdebug</span><br><span class="line">     9. aosp_car_x86-userdebug</span><br><span class="line">     10. aosp_car_x86_64-userdebug</span><br><span class="line">     11. mini_emulator_arm64-userdebug</span><br><span class="line">     12. m_e_arm-userdebug</span><br><span class="line">     13. m_e_mips-userdebug</span><br><span class="line">     14. m_e_mips64-eng</span><br><span class="line">     15. mini_emulator_x86-userdebug</span><br><span class="line">     16. mini_emulator_x86_64-userdebug</span><br><span class="line">     17. uml-userdebug</span><br><span class="line">     18. aosp_crosshatch-userdebug</span><br><span class="line">     19. aosp_blueline-userdebug</span><br><span class="line">     20. aosp_cf_x86_auto-userdebug</span><br><span class="line">     21. aosp_cf_x86_phone-userdebug</span><br><span class="line">     22. aosp_cf_x86_tablet-userdebug</span><br><span class="line">     23. aosp_cf_x86_tablet_3g-userdebug</span><br><span class="line">     24. aosp_cf_x86_tv-userdebug</span><br><span class="line">     25. aosp_cf_x86_wear-userdebug</span><br><span class="line">     26. aosp_cf_x86_64_auto-userdebug</span><br><span class="line">     27. aosp_cf_x86_64_phone-userdebug</span><br><span class="line">     28. aosp_cf_x86_64_tablet-userdebug</span><br><span class="line">     29. aosp_cf_x86_64_tablet_3g-userdebug</span><br><span class="line">     30. aosp_cf_x86_64_tv-userdebug</span><br><span class="line">     31. aosp_cf_x86_64_wear-userdebug</span><br><span class="line">     32. cf_x86_auto-userdebug</span><br><span class="line">     33. cf_x86_phone-userdebug</span><br><span class="line">     34. cf_x86_tablet-userdebug</span><br><span class="line">     35. cf_x86_tablet_3g-userdebug</span><br><span class="line">     36. cf_x86_tv-userdebug</span><br><span class="line">     37. cf_x86_wear-userdebug</span><br><span class="line">     38. cf_x86_64_phone-userdebug</span><br><span class="line">     39. cf_x86_64_tablet-userdebug</span><br><span class="line">     40. cf_x86_64_tablet_3g-userdebug</span><br><span class="line">     41. cf_x86_64_tv-userdebug</span><br><span class="line">     42. cf_x86_64_wear-userdebug</span><br><span class="line">     43. aosp_marlin-userdebug</span><br><span class="line">     44. aosp_marlin_svelte-userdebug</span><br><span class="line">     45. aosp_sailfish-userdebug</span><br><span class="line">     46. aosp_walleye-userdebug</span><br><span class="line">     47. aosp_walleye_test-userdebug</span><br><span class="line">     48. aosp_taimen-userdebug</span><br><span class="line">     49. hikey-userdebug</span><br><span class="line">     50. hikey64_only-userdebug</span><br><span class="line">     51. hikey960-userdebug</span><br><span class="line"></span><br><span class="line">Which would you like? [aosp_arm-eng]</span><br></pre></td></tr></table></figure>
+<p>这里列出了所有的可编译的目标，所有编译目标都采用 <code>BUILD-BUILDTYPE</code> 形式。</p>
+<p><strong>BUILD</strong></p>
+<p><code>BUILD</code>表示特定功能的组合名称，即编译出的镜像可以在什么环境上运行，其中aosp(Android Open Source Project)代表Android开源项目，arm表示系统是运行在arm架构的处理器上，arm64则是指64位arm架构；处理器，x86则表示x86架构的处理器；此外，还有一些单词代表了特定的Nexus设备，下面是常用的设备代码和编译目标，更多参考<a href="https://source.android.google.cn/source/running.html#selecting-device-build" target="_blank" rel="noopener">官方文档</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">受型号</th>
+<th style="text-align:center">设备代码</th>
+<th style="text-align:center">编译目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Nexus 6P</td>
+<td style="text-align:center">angler</td>
+<td style="text-align:center">aosp_angler-userdebug</td>
+</tr>
+<tr>
+<td style="text-align:center">Nexus 5X</td>
+<td style="text-align:center">bullhead</td>
+<td style="text-align:center">aosp_bullhead-userdebug</td>
+</tr>
+<tr>
+<td style="text-align:center">Nexus 6</td>
+<td style="text-align:center">shamu</td>
+<td style="text-align:center">aosp_shamu-userdebug</td>
+</tr>
+<tr>
+<td style="text-align:center">Nexus 5</td>
+<td style="text-align:center">hammerhead</td>
+<td style="text-align:center">aosp_hammerhead-userdebug</td>
+</tr>
+</tbody>
+</table>
+<p><strong>BUILDTYPE</strong></p>
+<p><code>BUILDTYPE</code>表示编译类型，一般有三种：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">编译类型</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">user</td>
+<td style="text-align:center">表示编译出的系统镜像是可以用来正式发布到市场的版本，其权限是被限制的(如：没有root权限,不能dedug等)</td>
+</tr>
+<tr>
+<td style="text-align:center">userdebug</td>
+<td style="text-align:center">在user版本的基础上开放了root权限和debug权限</td>
+</tr>
+<tr>
+<td style="text-align:center">eng</td>
+<td style="text-align:center">表示engineer，也就是所谓的开发工程师的版本，拥有最大的权限(root等)，此外还附带了许多debug工具</td>
+</tr>
+</tbody>
+</table>
+<p>如果你有Pixel或Nexus真机，选择对应的编译目标即可，否则我们就选模拟器，即<code>5.aosp_x86-eng</code>。</p>
+<p>在上面的<code>Which would you like? [aosp_arm-eng]</code>后面输入<code>5</code>即可。也直接选择：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lunch 5</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lunch aosp_x86-eng</span><br></pre></td></tr></table></figure>
+<h4 id="编译代码"><a href="#编译代码" class="headerlink" title="编译代码"></a>编译代码</h4><p>在编译之前，可以输入以下命令，查看你的Mac CPU核数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sysctl -n machdep.cpu.core_count</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+<p>输出为4核，我们就可以启动4个线程来编译源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make -j4</span><br></pre></td></tr></table></figure>
+<p>接下来就是漫长的编译过程，一般需要2~3小时，如果看到下面的提示，则表示编译完成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#### build completed successfully (02:15:52 (hh:mm:ss)) ####</span><br></pre></td></tr></table></figure>
+<h3 id="运行模拟器"><a href="#运行模拟器" class="headerlink" title="运行模拟器"></a>运行模拟器</h3><p>在编译完成之后，在终端里输入以下命令，可使用模拟器运行编译出的镜像：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ emulator</span><br></pre></td></tr></table></figure>
+<p>如果想要模拟器能联网的话，可以这样启动模拟器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ emulator -dns-server 8.8.8.8,114.114.114.114</span><br></pre></td></tr></table></figure>
+<p>如果终端关闭了，下次进入源码根目录时想要启动模拟器，需要这样做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ source build/envsetup.sh</span><br><span class="line">$ lunch aosp_x86-eng</span><br><span class="line">$ emulator -dns-server 8.8.8.8,114.114.114.114</span><br></pre></td></tr></table></figure>
+<h2 id="AOSP源码导入AS"><a href="#AOSP源码导入AS" class="headerlink" title="AOSP源码导入AS"></a>AOSP源码导入AS</h2><h3 id="编译idegen模块"><a href="#编译idegen模块" class="headerlink" title="编译idegen模块"></a>编译idegen模块</h3><p>在源码根目录下使用下面命令编译<code>idegen</code>模块：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mmm development/tools/idegen/</span><br></pre></td></tr></table></figure>
+<p>编译完成后有如下提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#### build completed successfully (02:14 (mm:ss)) ####</span><br></pre></td></tr></table></figure>
+<p>继续执行下面命令，会在源码根目录下生成<code>android.ipr</code>、<code>android.iml</code> IDEA工程配置文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ development/tools/idegen/idegen.sh</span><br><span class="line">Read excludes: 26ms</span><br><span class="line">Traversed tree: 118715ms</span><br></pre></td></tr></table></figure>
+<p><strong>注意：对于平常看源码调试源码来说AOSP源码整体编译一遍就可以了，目前我们用到的单编就是上面所说的idegen模块，如果我们在源码导入AS的过程中出现了android.ipr/android.iml文件以及随后导入AS自动生成的android.iws文件损坏情况，我们只需在AOSP源码根目录下找到这三个文件删掉，然后重复上面的步骤重新生成一下就行了。</strong></p>
+<h3 id="精简android-iml文件"><a href="#精简android-iml文件" class="headerlink" title="精简android.iml文件"></a>精简android.iml文件</h3><p>android源码在一个类文件中点击类名能够跳转到另一个类文件依赖的就是<code>android.iml</code>文件中的配置，但是默认生成的<code>android.iml</code>文件中导入了太多不必要的代码，直接导入AS会导致indexing很长时间，我们可以精简一部分，比如测试类的文件，它们在<code>android.iml</code>文件中都有这么一个特征，以<code>&lt;sourceFolder</code>开头，以<code>isTestSource=&quot;true&quot;/&gt;</code>结尾，所以，我们可以用VSCode打开<code>android.iml</code>文件，然后用VSCode的文本替换功能把以<code>&lt;sourceFolder</code>开头<code>isTestSource=&quot;true&quot;/&gt;</code>结尾的行替换成空格，所有被替换的文件都不会导入AS，加快了indexing速度。</p>
+<p>因为以<code>&lt;sourceFolder</code>开头<code>isTestSource=&quot;true&quot;/&gt;</code>结尾的行太多了，我们不可能一行行的删，怎么办呢？使用正则表达式匹配这些行。</p>
+<p>我们使用VSCode的文本替换功能，然后在匹配栏输入<code>&lt;sourceFolder .{0,2000} isTestSource=&quot;true&quot;/&gt;</code>（前提把匹配栏切换成支持正则表达式），这时候你会发现所有匹配上的行都高亮显示了，然后在替换栏输入空格，点击替换按钮就会一键替换完成，然后保存。</p>
+<h3 id="导入源码"><a href="#导入源码" class="headerlink" title="导入源码"></a>导入源码</h3><p>我们在AOSP源码目录下找到上面生成的<code>android.ipr</code>文件，然后鼠标右键选择“打开方式”，找到Android Studio，然后打开，如果遇到<code>convert</code>一类的提示，<strong>千万不要<code>convert</code></strong>，因为<code>convert</code>之后，你的<code>android.iml</code>文件标签中的属性会发生变化，导致的结果就是<code>Source Folders</code>识别不出你导入了哪些文件夹。</p>
+<p>然后就等待吧，直到AS indexing完成…</p>
+<p>接下来，我们需要看看源码有没有导入成功，怎么判断成没成功呢？</p>
+<p>我们打开AS上的<code>Project Structure</code>按钮，如图：</p>
+<p><img src="https://wx1.sbimg.cn/2020/07/02/2aYoe.png" alt></p>
+<p>然后出现下面这个界面：</p>
+<p><img src="https://wx2.sbimg.cn/2020/07/02/2aZqD.png" alt></p>
+<p>在<code>Source Folders</code>里面出现了很多类似于上图中的蓝色路径，那恭喜你，源码导入成功了(由于导入的源码太多，你可能在打开上述页面时会非常卡顿)。</p>
+<p>导入源码成功之后，我们就需要一些配置才能更方便的阅读源码和调试。</p>
+<p><strong>第一步</strong>：配置一个<code>Module SDK</code>，如下图。</p>
+<p><img src="https://wx1.sbimg.cn/2020/07/02/2aaEN.png" alt></p>
+<p>我们在<code>Project Structure</code>页面中点开<code>SDKs</code>，然后点击<code>+</code>号添加一个名为<code>1.8 (No Libraries)</code>的SDK，<code>JDK home path</code>可以选择Android Studio自带的JDK home目录，也可以选择Mac上已安装的JDK home目录，无所谓，最重要的一点来了，就是要把上图中的<code>Classpath</code>和<code>Sourcepath</code>中的依赖删除干净，一个不留，这里说一下<code>Classpath</code>和<code>Sourcepath</code>的意义：</p>
+<p><code>Classpath</code>：表示项目依赖的类，一般是jar包；</p>
+<p><code>Sourcepath</code>：表示依赖的这些类的源代码目录，如果没有设置<code>Sourcepath</code>，我们在项目中跳转到这些依赖的类时，看到的是字节码文件反编译后的Java代码，没有任何的代码注释，但设置了<code>Sourcepath</code>，就是跳转到<code>Sourcepath</code>中的源代码，是有注释的，一般<code>Classpath</code>中的jar包是由<code>Sourcepath</code>中的源代码打成jar包得来的。</p>
+<p><strong>第二步</strong>：配好了<code>Module SDK</code>后，我们需要把它引用到AOSP源码中。</p>
+<p><img src="https://wx2.sbimg.cn/2020/07/02/2aUkj.png" alt></p>
+<p>我们在<code>Project Structure</code>界面点击<code>Modules</code>，然后在<code>1</code>处选择我们刚刚配置的<code>1.8 (No Libraries)</code>sdk，然后<code>2</code>处就有了这个sdk的引用，你会发现这个引用是没有<code>-</code>删除按钮的，这就意味着你必须选择一个<code>Module SDK</code>引用，但是AOSP源码中的所有代码都比较完全，没有必要去引用其他的依赖，所以我们前面配置了一个没有任何依赖的<code>Module SDK</code>供源码引用(删除了所有的<code>Classpath</code>和<code>Sourcepath</code>中的依赖)。</p>
+<p><strong>第三步</strong>：最后也是很重要的一步，没有这一步，看源码是没有问题的，但是想要调试就不行了。</p>
+<p><img src="https://wx1.sbimg.cn/2020/07/02/2aisk.png" alt></p>
+<p>还是在<code>Project Structure</code>界面中点击<code>Project</code>，然后画红框部分选择一个Android SDK，最好是和AOSP源码版本对应的SDK。</p>
+<p>最后，点击<code>Apply</code>和<code>OK</code>，完成设置，等待一会indexing后就可以愉快的看源码了。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年07月02日 19:13</p>
+        <p>原始链接： <a class="post-url" href="/2020/01/25/Mac上Android源码下载编译导入AS教程/" title="Android源码之下载编译导入AS（Mac版）">https://www.johnnyit.cn/2020/01/25/Mac上Android源码下载编译导入AS教程/</a></p>
+        <footer>
+            <a href="https://www.johnnyit.cn">
+                <img src="/images/logo.png" alt="Johnny">
+                Johnny
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2020/01/25/Mac上Android源码下载编译导入AS教程/&title=《Android源码之下载编译导入AS（Mac版）》 — Johnny's Blog&pic=https://wx1.sbimg.cn/2020/07/02/2aHH6.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.johnnyit.cn/2020/01/25/Mac上Android源码下载编译导入AS教程/&title=《Android源码之下载编译导入AS（Mac版）》 — Johnny's Blog&source=Android技术博客" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.johnnyit.cn/2020/01/25/Mac上Android源码下载编译导入AS教程/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android源码之下载编译导入AS（Mac版）》 — Johnny's Blog&url=https://www.johnnyit.cn/2020/01/25/Mac上Android源码下载编译导入AS教程/&via=https://www.johnnyit.cn" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.johnnyit.cn/2020/01/25/Mac上Android源码下载编译导入AS教程/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.johnnyit.cn/2020/01/25/Mac上Android源码下载编译导入AS教程/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/android源码/" class="color5">android源码</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android源码之下载编译导入AS（Mac版）"><span class="post-toc-text">Android源码之下载编译导入AS（Mac版）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AOSP源码下载和编译"><span class="post-toc-text">AOSP源码下载和编译</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#环境准备"><span class="post-toc-text">环境准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#创建分区大小写的磁盘映像"><span class="post-toc-text">创建分区大小写的磁盘映像</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#添加装载和卸载磁盘分区的命令和函数"><span class="post-toc-text">添加装载和卸载磁盘分区的命令和函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安装JDK"><span class="post-toc-text">安装JDK</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安装Xcode和其他软件包"><span class="post-toc-text">安装Xcode和其他软件包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设置文件描述符数量上限"><span class="post-toc-text">设置文件描述符数量上限</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载源码"><span class="post-toc-text">下载源码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#下载安装Repo工具"><span class="post-toc-text">下载安装Repo工具</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#初始化Repo客户端"><span class="post-toc-text">初始化Repo客户端</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#下载源代码"><span class="post-toc-text">下载源代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译"><span class="post-toc-text">编译</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#初始化编译环境"><span class="post-toc-text">初始化编译环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#选择编译目标"><span class="post-toc-text">选择编译目标</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编译代码"><span class="post-toc-text">编译代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#运行模拟器"><span class="post-toc-text">运行模拟器</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AOSP源码导入AS"><span class="post-toc-text">AOSP源码导入AS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译idegen模块"><span class="post-toc-text">编译idegen模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#精简android-iml文件"><span class="post-toc-text">精简android.iml文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#导入源码"><span class="post-toc-text">导入源码</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/15/Android开发实践之通用Dialog封装/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Android开发实践之通用Dialog封装</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2020 Johnny<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://www.johnnyit.cn",
+      animate: false,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/Android第三方库使用/">Android第三方库使用</a><a class="category-link" href="/categories/AutoCompleteTextView/">AutoCompleteTextView</a><a class="category-link" href="/categories/Hexo/">Hexo</a><a class="category-link" href="/categories/Java基础/">Java基础</a><a class="category-link" href="/categories/android/">android</a><a class="category-link" href="/categories/android控件使用/">android控件使用</a><a class="category-link" href="/categories/android源码/">android源码</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 15px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 15px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
