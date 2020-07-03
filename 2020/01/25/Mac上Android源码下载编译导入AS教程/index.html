@@ -8,13 +8,13 @@
   
     <meta name="keywords" content="Android技术博客,Android,个人博客">
   
-  <meta name="description" content="Android源码之下载编译导入AS（Mac版）AOSP源码下载和编译环境准备官方指南： 要求 搭建编译环境 推荐准备250G可用磁盘空间。 创建分区大小写的磁盘映像Mac OS默认会在不区分大小写的文件系统中运行，但由于Git并不支持此类文件系统，所以需要在Mac OS上建立一个区分大小写的磁盘分区。我们这里使用命令行来创建，一是比较方便，二是后期可扩展。 您可以使用磁盘映像在现有的 Mac">
+  <meta name="description" content="AOSP源码下载和编译环境准备官方指南： 要求 搭建编译环境 推荐准备250G可用磁盘空间。 创建分区大小写的磁盘映像Mac OS默认会在不区分大小写的文件系统中运行，但由于Git并不支持此类文件系统，所以需要在Mac OS上建立一个区分大小写的磁盘分区。我们这里使用命令行来创建，一是比较方便，二是后期可扩展。 您可以使用磁盘映像在现有的 Mac OS 环境中创建区分大小写的文件系统。要创建磁盘">
 <meta name="keywords" content="android源码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android源码之下载编译导入AS（Mac版）">
 <meta property="og:url" content="https://www.johnnyit.cn/2020/01/25/Mac上Android源码下载编译导入AS教程/index.html">
 <meta property="og:site_name" content="Johnny&#39;s Blog">
-<meta property="og:description" content="Android源码之下载编译导入AS（Mac版）AOSP源码下载和编译环境准备官方指南： 要求 搭建编译环境 推荐准备250G可用磁盘空间。 创建分区大小写的磁盘映像Mac OS默认会在不区分大小写的文件系统中运行，但由于Git并不支持此类文件系统，所以需要在Mac OS上建立一个区分大小写的磁盘分区。我们这里使用命令行来创建，一是比较方便，二是后期可扩展。 您可以使用磁盘映像在现有的 Mac">
+<meta property="og:description" content="AOSP源码下载和编译环境准备官方指南： 要求 搭建编译环境 推荐准备250G可用磁盘空间。 创建分区大小写的磁盘映像Mac OS默认会在不区分大小写的文件系统中运行，但由于Git并不支持此类文件系统，所以需要在Mac OS上建立一个区分大小写的磁盘分区。我们这里使用命令行来创建，一是比较方便，二是后期可扩展。 您可以使用磁盘映像在现有的 Mac OS 环境中创建区分大小写的文件系统。要创建磁盘">
 <meta property="og:locale" content="CN">
 <meta property="og:image" content="https://wx1.sbimg.cn/2020/07/02/2aHH6.png">
 <meta property="og:image" content="https://wx1.sbimg.cn/2020/07/02/2aYoe.png">
@@ -22,10 +22,10 @@
 <meta property="og:image" content="https://wx1.sbimg.cn/2020/07/02/2aaEN.png">
 <meta property="og:image" content="https://wx2.sbimg.cn/2020/07/02/2aUkj.png">
 <meta property="og:image" content="https://wx1.sbimg.cn/2020/07/02/2aisk.png">
-<meta property="og:updated_time" content="2020-07-02T11:13:53.145Z">
+<meta property="og:updated_time" content="2020-07-03T09:42:12.840Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android源码之下载编译导入AS（Mac版）">
-<meta name="twitter:description" content="Android源码之下载编译导入AS（Mac版）AOSP源码下载和编译环境准备官方指南： 要求 搭建编译环境 推荐准备250G可用磁盘空间。 创建分区大小写的磁盘映像Mac OS默认会在不区分大小写的文件系统中运行，但由于Git并不支持此类文件系统，所以需要在Mac OS上建立一个区分大小写的磁盘分区。我们这里使用命令行来创建，一是比较方便，二是后期可扩展。 您可以使用磁盘映像在现有的 Mac">
+<meta name="twitter:description" content="AOSP源码下载和编译环境准备官方指南： 要求 搭建编译环境 推荐准备250G可用磁盘空间。 创建分区大小写的磁盘映像Mac OS默认会在不区分大小写的文件系统中运行，但由于Git并不支持此类文件系统，所以需要在Mac OS上建立一个区分大小写的磁盘分区。我们这里使用命令行来创建，一是比较方便，二是后期可扩展。 您可以使用磁盘映像在现有的 Mac OS 环境中创建区分大小写的文件系统。要创建磁盘">
 <meta name="twitter:image" content="https://wx1.sbimg.cn/2020/07/02/2aHH6.png">
   
   
@@ -151,7 +151,7 @@
       
             
             <p><img src="https://wx1.sbimg.cn/2020/07/02/2aHH6.png" alt></p>
-<h1 id="Android源码之下载编译导入AS（Mac版）"><a href="#Android源码之下载编译导入AS（Mac版）" class="headerlink" title="Android源码之下载编译导入AS（Mac版）"></a>Android源码之下载编译导入AS（Mac版）</h1><h2 id="AOSP源码下载和编译"><a href="#AOSP源码下载和编译" class="headerlink" title="AOSP源码下载和编译"></a>AOSP源码下载和编译</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>官方指南：</p>
+<h2 id="AOSP源码下载和编译"><a href="#AOSP源码下载和编译" class="headerlink" title="AOSP源码下载和编译"></a>AOSP源码下载和编译</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>官方指南：</p>
 <p><a href="https://source.android.com/source/requirements" target="_blank" rel="noopener">要求</a></p>
 <p><a href="https://source.android.com/source/initializing" target="_blank" rel="noopener">搭建编译环境</a></p>
 <p>推荐准备250G可用磁盘空间。</p>
@@ -336,7 +336,7 @@
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年07月02日 19:13</p>
+        <p>最后更新： 2020年07月03日 17:42</p>
         <p>原始链接： <a class="post-url" href="/2020/01/25/Mac上Android源码下载编译导入AS教程/" title="Android源码之下载编译导入AS（Mac版）">https://www.johnnyit.cn/2020/01/25/Mac上Android源码下载编译导入AS教程/</a></p>
         <footer>
             <a href="https://www.johnnyit.cn">
@@ -454,12 +454,22 @@
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android源码之下载编译导入AS（Mac版）"><span class="post-toc-text">Android源码之下载编译导入AS（Mac版）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AOSP源码下载和编译"><span class="post-toc-text">AOSP源码下载和编译</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#环境准备"><span class="post-toc-text">环境准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#创建分区大小写的磁盘映像"><span class="post-toc-text">创建分区大小写的磁盘映像</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#添加装载和卸载磁盘分区的命令和函数"><span class="post-toc-text">添加装载和卸载磁盘分区的命令和函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安装JDK"><span class="post-toc-text">安装JDK</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安装Xcode和其他软件包"><span class="post-toc-text">安装Xcode和其他软件包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设置文件描述符数量上限"><span class="post-toc-text">设置文件描述符数量上限</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载源码"><span class="post-toc-text">下载源码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#下载安装Repo工具"><span class="post-toc-text">下载安装Repo工具</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#初始化Repo客户端"><span class="post-toc-text">初始化Repo客户端</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#下载源代码"><span class="post-toc-text">下载源代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译"><span class="post-toc-text">编译</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#初始化编译环境"><span class="post-toc-text">初始化编译环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#选择编译目标"><span class="post-toc-text">选择编译目标</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编译代码"><span class="post-toc-text">编译代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#运行模拟器"><span class="post-toc-text">运行模拟器</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AOSP源码导入AS"><span class="post-toc-text">AOSP源码导入AS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译idegen模块"><span class="post-toc-text">编译idegen模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#精简android-iml文件"><span class="post-toc-text">精简android.iml文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#导入源码"><span class="post-toc-text">导入源码</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AOSP源码下载和编译"><span class="post-toc-text">AOSP源码下载和编译</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#环境准备"><span class="post-toc-text">环境准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#创建分区大小写的磁盘映像"><span class="post-toc-text">创建分区大小写的磁盘映像</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#添加装载和卸载磁盘分区的命令和函数"><span class="post-toc-text">添加装载和卸载磁盘分区的命令和函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安装JDK"><span class="post-toc-text">安装JDK</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安装Xcode和其他软件包"><span class="post-toc-text">安装Xcode和其他软件包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设置文件描述符数量上限"><span class="post-toc-text">设置文件描述符数量上限</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载源码"><span class="post-toc-text">下载源码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#下载安装Repo工具"><span class="post-toc-text">下载安装Repo工具</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#初始化Repo客户端"><span class="post-toc-text">初始化Repo客户端</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#下载源代码"><span class="post-toc-text">下载源代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译"><span class="post-toc-text">编译</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#初始化编译环境"><span class="post-toc-text">初始化编译环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#选择编译目标"><span class="post-toc-text">选择编译目标</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编译代码"><span class="post-toc-text">编译代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#运行模拟器"><span class="post-toc-text">运行模拟器</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AOSP源码导入AS"><span class="post-toc-text">AOSP源码导入AS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译idegen模块"><span class="post-toc-text">编译idegen模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#精简android-iml文件"><span class="post-toc-text">精简android.iml文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#导入源码"><span class="post-toc-text">导入源码</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
+  
+    <a href="/2020/03/25/记-引用GitHub上图片到markdown文件/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          图床
+        
+      </span>
+    </a>
   
   
     <a href="/2020/01/15/Android开发实践之通用Dialog封装/" id="article-nav-older" class="article-nav-link-wrap">
@@ -525,10 +535,10 @@
 <div class="sidebar-menu-box" id="sidebar-menu-box">
     <div class="sidebar-menu-box-container">
         <div id="sidebar-menu-box-categories">
-            <a class="category-link" href="/categories/Android第三方库使用/">Android第三方库使用</a><a class="category-link" href="/categories/AutoCompleteTextView/">AutoCompleteTextView</a><a class="category-link" href="/categories/Hexo/">Hexo</a><a class="category-link" href="/categories/Java基础/">Java基础</a><a class="category-link" href="/categories/android/">android</a><a class="category-link" href="/categories/android控件使用/">android控件使用</a><a class="category-link" href="/categories/android源码/">android源码</a>
+            <a class="category-link" href="/categories/Android-Studio/">Android Studio</a><a class="category-link" href="/categories/Android第三方库使用/">Android第三方库使用</a><a class="category-link" href="/categories/AutoCompleteTextView/">AutoCompleteTextView</a><a class="category-link" href="/categories/Hexo/">Hexo</a><a class="category-link" href="/categories/Java基础/">Java基础</a><a class="category-link" href="/categories/android/">android</a><a class="category-link" href="/categories/android控件使用/">android控件使用</a><a class="category-link" href="/categories/android源码/">android源码</a><a class="category-link" href="/categories/git/">git</a><a class="category-link" href="/categories/github/">github</a>
         </div>
         <div id="sidebar-menu-box-tags">
-            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 15px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 15px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
         </div>
     </div>
     <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
@@ -561,7 +571,7 @@
     <div class="mobile-header-tag-container">
         <span class="title">Tags</span>
         <div id="mobile-header-container-tags">
-            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 15px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 15px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
         </div>
     </div>
 </div>
