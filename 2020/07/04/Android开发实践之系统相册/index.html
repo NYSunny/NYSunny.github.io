@@ -3,27 +3,23 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>AutoCompleteTextView和MultiAutoCompleteTextView的简单用法 | Johnny&#39;s Blog</title>
+  <title>Android开发实践之系统相册 | Johnny&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="Android技术博客,Android,个人博客">
   
-  <meta name="description" content="1.AutoCompleteTextView的基本用法1234567891011121314//待匹配的字符串private String[] res = new String[]&amp;#123;&quot;shanghai1&quot;, &quot;shanghai2&quot;, &quot;beijing1&quot;, &quot;beijing2&quot;, &quot;tianjin&quot;&amp;#125;;//创建适配器ArrayAdapter adapter = new Arr">
-<meta name="keywords" content="AutoCompleteTextView">
+  <meta name="description" content="一、前言android系统相册的启动方式相对简单，选择照片后会返回一个Uri，放在Intent中的mData字段中，但是不同的系统版本Uri对应的图片路径不一样，有的是真实图片路径，有的却不是，所以我们在开发的时候需要对这一部分做适配，已达到各个版本的兼容。 二、启动系统相册启动系统相册页面的代码如下所示： 1234567fun toAlbum(activity: Activity) &amp;#123;">
+<meta name="keywords" content="android系统组件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AutoCompleteTextView和MultiAutoCompleteTextView的简单用法">
-<meta property="og:url" content="https://www.johnnyit.cn/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/index.html">
+<meta property="og:title" content="Android开发实践之系统相册">
+<meta property="og:url" content="https://www.johnnyit.cn/2020/07/04/Android开发实践之系统相册/index.html">
 <meta property="og:site_name" content="Johnny&#39;s Blog">
-<meta property="og:description" content="1.AutoCompleteTextView的基本用法1234567891011121314//待匹配的字符串private String[] res = new String[]&amp;#123;&quot;shanghai1&quot;, &quot;shanghai2&quot;, &quot;beijing1&quot;, &quot;beijing2&quot;, &quot;tianjin&quot;&amp;#125;;//创建适配器ArrayAdapter adapter = new Arr">
+<meta property="og:description" content="一、前言android系统相册的启动方式相对简单，选择照片后会返回一个Uri，放在Intent中的mData字段中，但是不同的系统版本Uri对应的图片路径不一样，有的是真实图片路径，有的却不是，所以我们在开发的时候需要对这一部分做适配，已达到各个版本的兼容。 二、启动系统相册启动系统相册页面的代码如下所示： 1234567fun toAlbum(activity: Activity) &amp;#123;">
 <meta property="og:locale" content="CN">
-<meta property="og:image" content="https://wx1.sbimg.cn/2020/06/25/Auto.jpg">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5231076-fc21255a8d7505c8.gif?imageMogr2/auto-orient/strip">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5231076-2ee52a15b0ce6b6e.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2020-06-25T08:45:31.088Z">
+<meta property="og:updated_time" content="2020-07-04T12:35:36.933Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AutoCompleteTextView和MultiAutoCompleteTextView的简单用法">
-<meta name="twitter:description" content="1.AutoCompleteTextView的基本用法1234567891011121314//待匹配的字符串private String[] res = new String[]&amp;#123;&quot;shanghai1&quot;, &quot;shanghai2&quot;, &quot;beijing1&quot;, &quot;beijing2&quot;, &quot;tianjin&quot;&amp;#125;;//创建适配器ArrayAdapter adapter = new Arr">
-<meta name="twitter:image" content="https://wx1.sbimg.cn/2020/06/25/Auto.jpg">
+<meta name="twitter:title" content="Android开发实践之系统相册">
+<meta name="twitter:description" content="一、前言android系统相册的启动方式相对简单，选择照片后会返回一个Uri，放在Intent中的mData字段中，但是不同的系统版本Uri对应的图片路径不一样，有的是真实图片路径，有的却不是，所以我们在开发的时候需要对这一部分做适配，已达到各个版本的兼容。 二、启动系统相册启动系统相册页面的代码如下所示： 1234567fun toAlbum(activity: Activity) &amp;#123;">
   
   
     <link rel="icon" href="/logo.png">
@@ -111,14 +107,14 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-AutoCompleteTextView和MultiAutoCompleteTextView的简单用法" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-Android开发实践之系统相册" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      AutoCompleteTextView和MultiAutoCompleteTextView的简单用法
+      Android开发实践之系统相册
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -126,12 +122,12 @@
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/AutoCompleteTextView/">AutoCompleteTextView</a>
+                      <a href="/categories/android系统组件/">android系统组件</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-01-17
+          <i class="fa fa-calendar"></i>  2020-07-04
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -147,21 +143,27 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <p><img src="https://wx1.sbimg.cn/2020/06/25/Auto.jpg" alt="Auto.jpg"></p>
-<h4 id="1-AutoCompleteTextView的基本用法"><a href="#1-AutoCompleteTextView的基本用法" class="headerlink" title="1.AutoCompleteTextView的基本用法"></a>1.AutoCompleteTextView的基本用法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//待匹配的字符串</span></span><br><span class="line"><span class="keyword">private</span> String[] res = <span class="keyword">new</span> String[]&#123;<span class="string">"shanghai1"</span>, <span class="string">"shanghai2"</span>, <span class="string">"beijing1"</span>, <span class="string">"beijing2"</span>, <span class="string">"tianjin"</span>&#125;;</span><br><span class="line"><span class="comment">//创建适配器</span></span><br><span class="line">ArrayAdapter adapter = <span class="keyword">new</span> ArrayAdapter(<span class="keyword">this</span>, android.R.layout.simple_list_item_1, res);</span><br><span class="line"><span class="comment">/*将适配器绑定到AutoCompleteTextView</span></span><br><span class="line"><span class="comment">* 注意：在xml文件下的&lt;AutoCompleteTextView/&gt;标签下需要添加android:completionThreshold="3"属性值，</span></span><br><span class="line"><span class="comment">* 该属性值用于在文本框中输入到第几个字符开始匹配给定的字符串*/</span></span><br><span class="line"><span class="keyword">this</span>.binding.txtAutoComplete.setAdapter(adapter);</span><br><span class="line">&lt;AutoCompleteTextView</span><br><span class="line">    android:id=<span class="string">"@+id/txt_auto_complete"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">    android:completionThreshold=<span class="string">"3"</span></span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
-<p>效果图如下：</p>
-<div align="center"><br><img src="http://upload-images.jianshu.io/upload_images/5231076-fc21255a8d7505c8.gif?imageMogr2/auto-orient/strip" style="zoom:50%"><br></div>
-
-<h4 id="2-MultiAutoCompleteTextView的基本用法"><a href="#2-MultiAutoCompleteTextView的基本用法" class="headerlink" title="2.MultiAutoCompleteTextView的基本用法"></a>2.MultiAutoCompleteTextView的基本用法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//待匹配的邮件字符串</span></span><br><span class="line"><span class="keyword">private</span> String[] emailRes = <span class="keyword">new</span> String[]&#123;<span class="string">"sdjfjie@qq.com"</span>, <span class="string">"djifgieh@gmail.com"</span>&#125;;</span><br><span class="line"><span class="comment">//创建适配器</span></span><br><span class="line">ArrayAdapter adapter = <span class="keyword">new</span> ArrayAdapter(<span class="keyword">this</span>, android.R.layout.simple_list_item_1, emailRes);</span><br><span class="line"><span class="comment">/*将适配器绑定到MultiAutoCompleteTextView</span></span><br><span class="line"><span class="comment">* 注意：在xml文件下的&lt;AutoCompleteTextView/&gt;标签下需要添加*android:completionThreshold="3"属性值，</span></span><br><span class="line"><span class="comment">* 该属性值用于在文本框中输入到第几个字符开始匹配给定的字符串*/</span></span><br><span class="line"><span class="keyword">this</span>.binding.txtMultiAutoComplete.setAdapter(adapter);</span><br><span class="line"><span class="comment">//添加分隔符“,”</span></span><br><span class="line"><span class="keyword">this</span>.binding.txtMultiAutoComplete.setTokenizer(<span class="keyword">new</span> MultiAutoCompleteTextView.CommaTokenizer());</span><br><span class="line">&lt;MultiAutoCompleteTextView</span><br><span class="line">    android:id=<span class="string">"@+id/txt_multi_auto_complete"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">    android:layout_below=<span class="string">"@id/txt_auto_complete"</span></span><br><span class="line">    android:hint=<span class="string">"请添加收件人邮箱"</span></span><br><span class="line">    android:textColorHint=<span class="string">"#dddddd"</span></span><br><span class="line">    android:completionThreshold=<span class="string">"3"</span></span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
-<p>效果图如下：</p>
-<div align="center"><br><img src="http://upload-images.jianshu.io/upload_images/5231076-2ee52a15b0ce6b6e.gif?imageMogr2/auto-orient/strip" style="zoom:50%"><br></div>
-
-
+            <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>android系统相册的启动方式相对简单，选择照片后会返回一个<code>Uri</code>，放在<code>Intent</code>中的<code>mData</code>字段中，但是不同的系统版本<code>Uri</code>对应的图片路径不一样，有的是真实图片路径，有的却不是，所以我们在开发的时候需要对这一部分做适配，已达到各个版本的兼容。</p>
+<h3 id="二、启动系统相册"><a href="#二、启动系统相册" class="headerlink" title="二、启动系统相册"></a>二、启动系统相册</h3><p>启动系统相册页面的代码如下所示：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">toAlbum</span><span class="params">(activity: <span class="type">Activity</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> intent = Intent(Intent.ACTION_PICK)</span><br><span class="line">    intent.type = <span class="string">"image/*"</span></span><br><span class="line">    <span class="keyword">if</span> (intent.resolveActivity(activity.packageManager) != <span class="literal">null</span>) &#123;</span><br><span class="line">       activity.startActivityForResult(intent, REQUEST_CODE_TO_ALBUM)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>网上很多博客在启动系统相册的时候还做了低版本的适配，大多数是针对android 4.4以下版本，这里也贴出来：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">toAlbum</span><span class="params">(activity: <span class="type">Activity</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> intent = Intent(Intent.ACTION_GET_CONTENT)</span><br><span class="line">        intent.type = <span class="string">"image/*"</span></span><br><span class="line">        intent.resolveActivity(activity.packageManager)?.let &#123;</span><br><span class="line">            activity.startActivityForResult(intent, REQUEST_CODE_TO_ALBUM)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>拿上面代码在android 10模拟器上尝试打开的是最近图片。</p>
+<p>另外还有的博客采用下面这种方式启动：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">toAlbum</span><span class="params">(activity: <span class="type">Activity</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> intent = Intent(Intent.ACTION_OPEN_DOCUMENT)</span><br><span class="line">        intent.addCategory(Intent.CATEGORY_OPENABLE)</span><br><span class="line">        intent.type = <span class="string">"image/*"</span></span><br><span class="line">        intent.resolveActivity(activity.packageManager)?.let &#123;</span><br><span class="line">            activity.startActivityForResult(intent, REQUEST_CODE_TO_ALBUM)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这种方式在android 10模拟器上打开的最近图片。</p>
+<h3 id="三、获取真实图片路径"><a href="#三、获取真实图片路径" class="headerlink" title="三、获取真实图片路径"></a>三、获取真实图片路径</h3><p>获取真实图片路径的方法如下：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">getRealPathFromUri</span><span class="params">(context: <span class="type">Context</span>, uri: <span class="type">Uri</span>)</span></span>: String &#123;</span><br><span class="line">        <span class="keyword">val</span> projection = arrayOf(MediaStore.Images.Media.DATA)</span><br><span class="line">        <span class="keyword">val</span> cursorLoader = CursorLoader(context, uri, projection, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>)</span><br><span class="line">        <span class="keyword">val</span> cursor = cursorLoader.loadInBackground()</span><br><span class="line">        <span class="keyword">return</span> cursor?.let &#123;</span><br><span class="line">            <span class="keyword">if</span> (it.moveToNext()) &#123;</span><br><span class="line">                <span class="keyword">val</span> index = it.getColumnIndex(MediaStore.Images.Media.DATA)</span><br><span class="line">                it.moveToFirst()</span><br><span class="line">                it.getString(index) ?: <span class="string">""</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="string">""</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; ?: <span class="string">""</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>利用游标去查询<code>Uri</code>对应的文件路径。</p>
+<p>更详细的适配方案请参考：</p>
+<p><a href="https://blog.csdn.net/huangxiaoguo1/article/details/79062341" target="_blank" rel="noopener">android打开手机相册获取真正的图片路径</a></p>
+<p><a href="https://blog.csdn.net/smileiam/article/details/79753745?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase" target="_blank" rel="noopener">Android根据图片Uri获取图片path绝对路径</a></p>
+<h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><p>类似这种功能的代码基本都是样板代码，可能不同android版本样板代码会有所差别，一个完善的兼容方案是需要一个过程的，需要经过系统升级和测试后不断完善，我们平常的关注点应该要放在为什么要这样做？它的原理是什么？而不是这些样板代码上。</p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年06月25日 16:45</p>
-        <p>原始链接： <a class="post-url" href="/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/" title="AutoCompleteTextView和MultiAutoCompleteTextView的简单用法">https://www.johnnyit.cn/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/</a></p>
+        <p>最后更新： 2020年07月04日 20:35</p>
+        <p>原始链接： <a class="post-url" href="/2020/07/04/Android开发实践之系统相册/" title="Android开发实践之系统相册">https://www.johnnyit.cn/2020/07/04/Android开发实践之系统相册/</a></p>
         <footer>
             <a href="https://www.johnnyit.cn">
                 <img src="/images/logo.png" alt="Johnny">
@@ -218,7 +220,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/&title=《AutoCompleteTextView和MultiAutoCompleteTextView的简单用法》 — Johnny's Blog&pic=https://wx1.sbimg.cn/2020/06/25/Auto.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2020/07/04/Android开发实践之系统相册/&title=《Android开发实践之系统相册》 — Johnny's Blog&pic=https://wx2.sbimg.cn/2020/06/25/ArrayList.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -228,22 +230,22 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.johnnyit.cn/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/&title=《AutoCompleteTextView和MultiAutoCompleteTextView的简单用法》 — Johnny's Blog&source=Android技术博客" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.johnnyit.cn/2020/07/04/Android开发实践之系统相册/&title=《Android开发实践之系统相册》 — Johnny's Blog&source=Android技术博客" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.johnnyit.cn/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.johnnyit.cn/2020/07/04/Android开发实践之系统相册/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《AutoCompleteTextView和MultiAutoCompleteTextView的简单用法》 — Johnny's Blog&url=https://www.johnnyit.cn/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/&via=https://www.johnnyit.cn" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android开发实践之系统相册》 — Johnny's Blog&url=https://www.johnnyit.cn/2020/07/04/Android开发实践之系统相册/&via=https://www.johnnyit.cn" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.johnnyit.cn/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.johnnyit.cn/2020/07/04/Android开发实践之系统相册/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -253,7 +255,7 @@
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.johnnyit.cn/2018/01/17/AutoCompleteTextView和MultiAutoCompleteTextView的简单用法/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.johnnyit.cn/2020/07/04/Android开发实践之系统相册/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -265,7 +267,7 @@
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/AutoCompleteTextView/" class="color1">AutoCompleteTextView</a>
+    <a href="/tags/android系统组件/" class="color2">android系统组件</a>
       
   </li>
 
@@ -278,26 +280,16 @@
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-AutoCompleteTextView的基本用法"><span class="post-toc-text">1.AutoCompleteTextView的基本用法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-MultiAutoCompleteTextView的基本用法"><span class="post-toc-text">2.MultiAutoCompleteTextView的基本用法</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、启动系统相册"><span class="post-toc-text">二、启动系统相册</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、获取真实图片路径"><span class="post-toc-text">三、获取真实图片路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、总结"><span class="post-toc-text">四、总结</span></a></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2018/01/20/Java异常/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          Java异常
-        
-      </span>
-    </a>
   
-  
-    <a href="/2017/10/25/AS常用快捷键/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">AS常用快捷键</span>
+    <a href="/2020/07/04/Android开发实践之调用系统相机/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Android开发实践之调用系统相机</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
