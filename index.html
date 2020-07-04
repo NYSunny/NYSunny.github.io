@@ -107,14 +107,77 @@
       <div class="outer">
         <section id="main" class="body-wrap">
   
-    <article id="post-记-引用GitHub上图片到markdown文件" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android开发实践之调用系统相机" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/25/记-引用GitHub上图片到markdown文件/" target="_blank">图床</a>
+      <a class="article-title" href="/2020/07/04/Android开发实践之调用系统相机/" target="_blank">Android开发实践之调用系统相机</a>
+    </h1>
+  
+
+          
+              <span class="header-cate">
+                <i class="fa fa-map-marker"></i>
+                  
+                  <a href="/categories/android系统组件/">android系统组件</a>
+                  
+              </span>
+          
+      </header>
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+        <div class="article-img">
+            <a href="/2020/07/04/Android开发实践之调用系统相机/" target="_blank">
+                
+                <img src="https://wx1.sbimg.cn/2020/07/04/2SAtw.png" alt="Android开发实践之调用系统相机" title="Android开发实践之调用系统相机">
+                
+            </a>
+        </div>
+        <div class="article-feed">
+            <p>
+                一、前言由于android 7.0（android N）之后，系统严格执行StrictMode模式，对安全做了更严格的校验，系统将不允许在app之间使用file://的形式传递一个File，否则会抛出FileUriExposedException异常，导致程序crash，app间对file://的分享需要通过FileProvider转为content://的形式才可以。
+...
+            </p>
+        </div>
+      
+        
+    </div>
+    <footer class="article-footer">
+        
+        <ul class="article-footer-menu">
+            
+                <li><i class="fa fa-calendar"></i>2020-07-04</li>
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/android系统组件/" class="color2">android系统组件</a>
+      
+  </li>
+
+        </ul>
+        
+            <a href="/2020/07/04/Android开发实践之调用系统相机/#more" class="article-more-link" target="_blank">more&gt;&gt;</a>
+        
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article id="post-图床" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/25/图床/" target="_blank">图床</a>
     </h1>
   
 
@@ -131,7 +194,7 @@
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2020/03/25/记-引用GitHub上图片到markdown文件/" target="_blank">
+            <a href="/2020/03/25/图床/" target="_blank">
                 
                 <img src="https://wx2.sbimg.cn/2020/07/03/2N3xJ.png" alt="图床" title="图床">
                 
@@ -163,7 +226,7 @@ https://raw.githubusercontent.com：固定地...
 
         </ul>
         
-            <a href="/2020/03/25/记-引用GitHub上图片到markdown文件/#more" class="article-more-link" target="_blank">more&gt;&gt;</a>
+            <a href="/2020/03/25/图床/#more" class="article-more-link" target="_blank">more&gt;&gt;</a>
         
     </footer>
   </div>
@@ -271,9 +334,8 @@ AOSP源码下载和编译环境准备官方指南：
         </div>
         <div class="article-feed">
             <p>
-                
-Android开发实践之通用Dialog封装前言在日常android开发中，我们会碰到各式各样的Dialog，一般情况下，我们都会封装一个通用的Dialog“壳子”去装不同风格的View，以减少样板代码的书写，今天就来说一说如何封装这个“壳子”。
-自定义Dialog主题Android默认的Dialog主题样式会包括标题栏，背景颜色等，这些通常情况下我们都不需要，会影响D...
+                前言在日常android开发中，我们会碰到各式各样的Dialog，一般情况下，我们都会封装一个通用的Dialog“壳子”去装不同风格的View，以减少样板代码的书写，今天就来说一说如何封装这个“壳子”。
+自定义Dialog主题Android默认的Dialog主题样式会包括标题栏，背景颜色等，这些通常情况下我们都不需要，会影响Dialog的显示效果，我们需要自定义主题把这些...
             </p>
         </div>
       
@@ -739,72 +801,6 @@ d...
 
 
   
-    <article id="post-Java异常" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/20/Java异常/" target="_blank">Java异常</a>
-    </h1>
-  
-
-          
-              <span class="header-cate">
-                <i class="fa fa-map-marker"></i>
-                  
-                  <a href="/categories/Java基础/">Java基础</a>
-                  
-              </span>
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2018/01/20/Java异常/" target="_blank">
-                
-                <img src="https://wx1.sbimg.cn/2020/06/25/Java.png" alt="Java异常" title="Java异常">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                一.异常的分类Java中的异常基类为Throwable，Error和Exception都继承自Throwable。
-Error是指系统错误或者资源耗尽，通常这些Error都是来自虚拟机，比较常见的Error有内存溢出错误(OutOfMemoryError)，栈溢出错误(StackOverflowError)。
-Exception是指代码异常，如果代码中抛出了这种异常就说明...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2018-01-20</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/基础/" class="color3">基础</a>
-      
-    <a href="/tags/Java异常/" class="color2">Java异常</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2018/01/20/Java异常/#more" class="article-more-link" target="_blank">more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -863,10 +859,10 @@ Exception是指代码异常，如果代码中抛出了这种异常就说明...
 <div class="sidebar-menu-box" id="sidebar-menu-box">
     <div class="sidebar-menu-box-container">
         <div id="sidebar-menu-box-categories">
-            <a class="category-link" href="/categories/Android-Studio/">Android Studio</a><a class="category-link" href="/categories/Android第三方库使用/">Android第三方库使用</a><a class="category-link" href="/categories/AutoCompleteTextView/">AutoCompleteTextView</a><a class="category-link" href="/categories/Hexo/">Hexo</a><a class="category-link" href="/categories/Java基础/">Java基础</a><a class="category-link" href="/categories/android/">android</a><a class="category-link" href="/categories/android控件使用/">android控件使用</a><a class="category-link" href="/categories/android源码/">android源码</a><a class="category-link" href="/categories/git/">git</a><a class="category-link" href="/categories/github/">github</a>
+            <a class="category-link" href="/categories/Android-Studio/">Android Studio</a><a class="category-link" href="/categories/Android第三方库使用/">Android第三方库使用</a><a class="category-link" href="/categories/AutoCompleteTextView/">AutoCompleteTextView</a><a class="category-link" href="/categories/Hexo/">Hexo</a><a class="category-link" href="/categories/Java基础/">Java基础</a><a class="category-link" href="/categories/android/">android</a><a class="category-link" href="/categories/android控件使用/">android控件使用</a><a class="category-link" href="/categories/android源码/">android源码</a><a class="category-link" href="/categories/android系统组件/">android系统组件</a><a class="category-link" href="/categories/git/">git</a><a class="category-link" href="/categories/github/">github</a>
         </div>
         <div id="sidebar-menu-box-tags">
-            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 15px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 15px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/android系统组件/" style="font-size: 10px;">android系统组件</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
         </div>
     </div>
     <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
@@ -899,7 +895,7 @@ Exception是指代码异常，如果代码中抛出了这种异常就说明...
     <div class="mobile-header-tag-container">
         <span class="title">Tags</span>
         <div id="mobile-header-container-tags">
-            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 15px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android控件/" style="font-size: 15px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/android系统组件/" style="font-size: 10px;">android系统组件</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
         </div>
     </div>
 </div>
