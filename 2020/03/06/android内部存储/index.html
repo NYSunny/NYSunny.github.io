@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Johnny&#39;s Blog">
 <meta property="og:description" content="获取内部存储目录一般应用的内部存储会默认创建三个文件夹：cache，code_cache，files，应用安装的时候就会自动创建。 获取内部存储路径相关方法： 12345678910获取内存存储路径常用方法：Context#getFilesDir() // /data/user/0/[package-name]/filesContext#getCacheDir() // /data/user/0/">
 <meta property="og:locale" content="CN">
-<meta property="og:updated_time" content="2020-07-14T14:40:59.947Z">
+<meta property="og:updated_time" content="2020-07-14T14:51:27.984Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android内部存储">
 <meta name="twitter:description" content="获取内部存储目录一般应用的内部存储会默认创建三个文件夹：cache，code_cache，files，应用安装的时候就会自动创建。 获取内部存储路径相关方法： 12345678910获取内存存储路径常用方法：Context#getFilesDir() // /data/user/0/[package-name]/filesContext#getCacheDir() // /data/user/0/">
@@ -154,7 +154,7 @@
 <p>当然了，如果你记性好的话也可以直接通过内部存储目录的绝对路径去<code>new</code>一个<code>File</code>，但是这种方式不建议使用，因为android设备非常的庞杂，再加上各个厂商的定制化，可能会导致你认为正确的路径到了其他手机上不好使了，会出现适配问题。</p>
 <p>&nbsp;</p>
 <h2 id="往内部存储空间写入文件"><a href="#往内部存储空间写入文件" class="headerlink" title="往内部存储空间写入文件"></a>往内部存储空间写入文件</h2><p>往内部存储空间写入文件的方式有很多种，我们可以分为两大类：一类是应用内存储文件，一类是应用间存储文件。</p>
-<h3 id="应用内存储文件"><a href="#应用内存储文件" class="headerlink" title="应用内存储文件"></a>应用内存储文件</h3><p>在应用内往内部存储空间中写入文件的方式有很多种，这里大概分为三大类：</p>
+<h3 id="应用内存储文件"><a href="#应用内存储文件" class="headerlink" title="应用内存储文件"></a>应用内存储文件</h3><p>在应用内往内部存储空间中写入文件的方式有很多种，这里大概分为三类：</p>
 <ul>
 <li>标准输出流</li>
 <li><code>EncryptedFile</code>方式</li>
@@ -188,7 +188,7 @@
 <p>最典型的就是应用调用系统相机拍照，我们需要给系统相机应用传一个照片输出路径<code>Uri</code>，系统相机拍完照片后就会把照片数据写入到这个<code>Uri</code>指向的文件。</p>
 <p>翻看Android 10和Android 6.0相机源码后，发现向<code>Uri</code>指定的文件中存储数据调用的API是相同的，下面是两个版本的源码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Android 6.0</span></span><br><span class="line">OutputStream outputStream = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">   outputStream = mContentResolver.openOutputStream(mSaveUri);</span><br><span class="line">   outputStream.write(data);</span><br><span class="line">   outputStream.close();</span><br><span class="line"></span><br><span class="line">   Log.v(TAG, <span class="string">"saved result to URI: "</span> + mSaveUri);</span><br><span class="line">   mActivity.setResultEx(Activity.RESULT_OK);</span><br><span class="line">   mActivity.finish();</span><br><span class="line">&#125; <span class="keyword">catch</span>(IOException ex) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Android 10</span></span><br><span class="line">OutputStream outputStream = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">   outputStream = mResourceConstructed.get().getContext().getContentResolver()</span><br><span class="line">                        .openOutputStream(saveUri.get());</span><br><span class="line">   outputStream.write(mPictureData);</span><br><span class="line">   outputStream.close();</span><br><span class="line"></span><br><span class="line">   Log.v(TAG, <span class="string">"saved result to URI: "</span> + saveUri);</span><br><span class="line">   <span class="keyword">return</span> Optional.of((State) StateIntentCompleted.from(</span><br><span class="line">                        <span class="keyword">this</span>, mResourceConstructed, <span class="keyword">new</span> Intent()));</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">   Log.e(TAG, <span class="string">"exception while saving result to URI: "</span> + saveUri, ex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>源码基本上一样，都是使用<code>ContentResolver</code>来写入数据，但是，这只是表象，实际在android 7.0之后，android系统规定了应用之间共享数据使用<code>content://</code>而不是<code>file://</code>，换句话说，android 6.0上相机接收到的<code>Uri</code>是<code>file://</code>开头的，android 10上相机接收到的<code>Uri</code>是<code>content://</code>开头的，所以上面两种版本的源码虽然都是调用<code>ContentResolver#openOutputStream(Uri)</code>方法，但是内部走的逻辑是不同。</p>
+<p>源码基本上一样，都是使用<code>ContentResolver</code>来写入数据，但是，这只是表象，实际在android 7.0之后，android系统规定了应用之间共享数据使用<code>content://</code>而不是<code>file://</code>，换句话说，android 6.0上相机接收到的<code>Uri</code>是<code>file://</code>开头的，android 10上相机接收到的<code>Uri</code>是<code>content://</code>开头的，所以上面两种版本的源码虽然都是调用<code>ContentResolver#openOutputStream(Uri)</code>方法，但是内部走的逻辑不同。</p>
 <p>所以，我们总结：</p>
 <blockquote>
 <p>不论是向<code>file://</code>开头或者<code>content://</code>开头的<code>Uri</code>中写入数据都是调用<code>ContentResolver#openOutputStream(Uri)</code>方法。</p>
@@ -215,14 +215,13 @@
 <li>应用对内部存储空间文件的读取和写入不需要系统授予读写权限；</li>
 <li>应用内读写文件可以采用标准的输入输出流；</li>
 <li>应用间读写文件一般会采用<code>ContentProvider</code>；</li>
-<li>内部存储空间上文件的读写不需要系统授予读写权限。</li>
 </ul>
 <p>&nbsp;</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.android.com/training/data-storage/files/internal?hl=zh-cn" target="_blank" rel="noopener">官方文档：将文件保存到内部存储空间</a></p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年07月14日 22:40</p>
+        <p>最后更新： 2020年07月14日 22:51</p>
         <p>原始链接： <a class="post-url" href="/2020/03/06/android内部存储/" title="android内部存储">https://www.johnnyit.cn/2020/03/06/android内部存储/</a></p>
         <footer>
             <a href="https://www.johnnyit.cn">
