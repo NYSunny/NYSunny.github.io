@@ -3,21 +3,23 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Archives | Johnny&#39;s Blog</title>
+  <title>选择内部存储和外部存储 | Johnny&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="Android技术博客,Android,个人博客">
   
-  <meta name="description" content="Android技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Johnny&#39;s Blog">
-<meta property="og:url" content="https://www.johnnyit.cn/archives/index.html">
+  <meta name="description" content="一、对Android内部存储和外部存储的理解所有的android设备都有两个存储区域：内部存储空间和外部存储空间，这两个名字是早期就定好的，当时的android设备大多提供内置的存储（内部存储空间）以及可移动的存储媒介（如Micro SD卡，提供外部存储空间）。现在，很多设备将内置的永久性存储空间单独划分为“内部”和“外部”，所以，即使没有可移动的存储媒介，外部存储空间也是存在的，而且内置的外部存">
+<meta name="keywords" content="android存储">
+<meta property="og:type" content="article">
+<meta property="og:title" content="选择内部存储和外部存储">
+<meta property="og:url" content="https://www.johnnyit.cn/2020/03/08/选择内部存储和外部存储/index.html">
 <meta property="og:site_name" content="Johnny&#39;s Blog">
-<meta property="og:description" content="Android技术博客">
+<meta property="og:description" content="一、对Android内部存储和外部存储的理解所有的android设备都有两个存储区域：内部存储空间和外部存储空间，这两个名字是早期就定好的，当时的android设备大多提供内置的存储（内部存储空间）以及可移动的存储媒介（如Micro SD卡，提供外部存储空间）。现在，很多设备将内置的永久性存储空间单独划分为“内部”和“外部”，所以，即使没有可移动的存储媒介，外部存储空间也是存在的，而且内置的外部存">
 <meta property="og:locale" content="CN">
+<meta property="og:updated_time" content="2020-07-15T02:38:30.809Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Johnny&#39;s Blog">
-<meta name="twitter:description" content="Android技术博客">
+<meta name="twitter:title" content="选择内部存储和外部存储">
+<meta name="twitter:description" content="一、对Android内部存储和外部存储的理解所有的android设备都有两个存储区域：内部存储空间和外部存储空间，这两个名字是早期就定好的，当时的android设备大多提供内置的存储（内部存储空间）以及可移动的存储媒介（如Micro SD卡，提供外部存储空间）。现在，很多设备将内置的永久性存储空间单独划分为“内部”和“外部”，所以，即使没有可移动的存储媒介，外部存储空间也是存在的，而且内置的外部存">
   
   
     <link rel="icon" href="/logo.png">
@@ -105,197 +107,159 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap">
-  
-  
+        <section id="main" class="body-wrap"><article id="post-选择内部存储和外部存储" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/07/06/ViewHolder那些事儿/" class="archive-article-date">
-  <time datetime="2020-07-05T16:00:00.000Z" itemprop="datePublished">07-06</time>
-</a>
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/06/ViewHolder那些事儿/" target="_blank">ViewHolder那些事儿</a>
+    <h1 class="post-title" itemprop="name">
+      选择内部存储和外部存储
     </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/android存储/">android存储</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-03-08
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
   
 
-    </header>
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
       
-        <div class="archive-post-footer">
             
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/RecyclerView/" class="color3">RecyclerView</a>
-      
-    <a href="/tags/ListView/" class="color4">ListView</a>
-      
-  </li>
+            <h3 id="一、对Android内部存储和外部存储的理解"><a href="#一、对Android内部存储和外部存储的理解" class="headerlink" title="一、对Android内部存储和外部存储的理解"></a>一、对Android内部存储和外部存储的理解</h3><p>所有的android设备都有两个存储区域：内部存储空间和外部存储空间，这两个名字是早期就定好的，当时的android设备大多提供内置的存储（内部存储空间）以及可移动的存储媒介（如Micro SD卡，提供外部存储空间）。现在，很多设备将内置的永久性存储空间单独划分为“内部”和“外部”，所以，即使没有可移动的存储媒介，外部存储空间也是存在的，而且内置的外部存储空间和可移动的外部存储空间在API的使用上是相同的。</p>
+<p>&nbsp;</p>
+<h3 id="二、如何选择内部存储空间和外部存储空间"><a href="#二、如何选择内部存储空间和外部存储空间" class="headerlink" title="二、如何选择内部存储空间和外部存储空间"></a>二、如何选择内部存储空间和外部存储空间</h3><h4 id="1-选择内部存储空间"><a href="#1-选择内部存储空间" class="headerlink" title="1.选择内部存储空间"></a>1.选择内部存储空间</h4><p>如果您希望用户和其他应用都无法访问您的文件，您应该选择内部存储空间存放文件。因为内部存储空间中的文件如果不主动对外暴露的话，其他应用是访问不到的，而且内部存储空间中的文件对用户是隐藏的，用户看不到。</p>
+<p>&nbsp;</p>
+<h4 id="2-选择外部存储空间"><a href="#2-选择外部存储空间" class="headerlink" title="2.选择外部存储空间"></a>2.选择外部存储空间</h4><p>符合下面三种情况之一就可以选择外部存储空间：</p>
+<ul>
+<li>不希望对文件访问设置限制</li>
+<li>希望与其他应用共享文件</li>
+<li>允许用户通过文件浏览器或者计算机访问文件</li>
+</ul>
+<p>外部存储空间中的文件用户通过文件浏览器或者计算机是可以访问到的，对用户可见。由于外部存储空间中文件对用户可见的特性，<strong>用户可能随时会删掉一些文件，所以应用在读取外部存储空间中的文件之前应该要确定文件是否存在，防止程序读写出现异常。</strong></p>
+<p>&nbsp;</p>
+<h3 id="三、参考"><a href="#三、参考" class="headerlink" title="三、参考"></a>三、参考</h3><p><a href="https://developer.android.google.cn/training/data-storage/files#InternalVsExternalStorage" target="_blank" rel="noopener">官方文档：选择内部存储或外部存储</a></p>
 
-        </div>
-      
-  </div>
-</article>
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年07月15日 10:38</p>
+        <p>原始链接： <a class="post-url" href="/2020/03/08/选择内部存储和外部存储/" title="选择内部存储和外部存储">https://www.johnnyit.cn/2020/03/08/选择内部存储和外部存储/</a></p>
+        <footer>
+            <a href="https://www.johnnyit.cn">
+                <img src="/images/logo.png" alt="Johnny">
+                Johnny
+            </a>
+        </footer>
+    </div>
+</div>
 
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/07/04/Android开发实践之系统相册/" class="archive-article-date">
-  <time datetime="2020-07-03T16:00:00.000Z" itemprop="datePublished">07-04</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/04/Android开发实践之系统相册/" target="_blank">Android开发实践之系统相册</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
+        
             
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/android系统组件/" class="color2">android系统组件</a>
-      
-  </li>
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
 
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
         </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/07/04/Android开发实践之调用系统相机/" class="archive-article-date">
-  <time datetime="2020-07-03T16:00:00.000Z" itemprop="datePublished">07-04</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/04/Android开发实践之调用系统相机/" target="_blank">Android开发实践之调用系统相机</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
+        <div class="reward-select">
             
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/android系统组件/" class="color2">android系统组件</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/25/Kotlin函数式编程/" class="archive-article-date">
-  <time datetime="2020-04-24T16:00:00.000Z" itemprop="datePublished">04-25</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/25/Kotlin函数式编程/" target="_blank">Kotlin函数式编程</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
             
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/函数式编程/" class="color1">函数式编程</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/03/25/图床/" class="archive-article-date">
-  <time datetime="2020-03-24T16:00:00.000Z" itemprop="datePublished">03-25</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/25/图床/" target="_blank">图床</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
             
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/github/" class="color2">github</a>
-      
-  </li>
-
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
         </div>
-      
-  </div>
-</article>
+    </div>
+</div>
 
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/03/08/选择内部存储和外部存储/" class="archive-article-date">
-  <time datetime="2020-03-07T16:00:00.000Z" itemprop="datePublished">03-08</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/08/选择内部存储和外部存储/" target="_blank">选择内部存储和外部存储</a>
-    </h1>
-  
 
-    </header>
-      
-        <div class="archive-post-footer">
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2020/03/08/选择内部存储和外部存储/&title=《选择内部存储和外部存储》 — Johnny's Blog&pic=https://wx2.sbimg.cn/2020/06/25/ArrayList.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.johnnyit.cn/2020/03/08/选择内部存储和外部存储/&title=《选择内部存储和外部存储》 — Johnny's Blog&source=Android技术博客" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.johnnyit.cn/2020/03/08/选择内部存储和外部存储/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《选择内部存储和外部存储》 — Johnny's Blog&url=https://www.johnnyit.cn/2020/03/08/选择内部存储和外部存储/&via=https://www.johnnyit.cn" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.johnnyit.cn/2020/03/08/选择内部存储和外部存储/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.johnnyit.cn/2020/03/08/选择内部存储和外部存储/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
@@ -304,150 +268,43 @@
       
   </li>
 
-        </div>
-      
+        </ul>
+        
+    </footer>
   </div>
 </article>
 
-  
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、对Android内部存储和外部存储的理解"><span class="post-toc-text">一、对Android内部存储和外部存储的理解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、如何选择内部存储空间和外部存储空间"><span class="post-toc-text">二、如何选择内部存储空间和外部存储空间</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-选择内部存储空间"><span class="post-toc-text">1.选择内部存储空间</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-选择外部存储空间"><span class="post-toc-text">2.选择外部存储空间</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、参考"><span class="post-toc-text">三、参考</span></a></li></ol>
+        </nav>
+    </aside>
     
+
+<nav id="article-nav">
+  
+    <a href="/2020/03/25/图床/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          图床
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2020/03/07/android上查询手机可用存储空间/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">可用存储空间和总空间的查询</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/03/07/android上查询手机可用存储空间/" class="archive-article-date">
-  <time datetime="2020-03-06T16:00:00.000Z" itemprop="datePublished">03-07</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/07/android上查询手机可用存储空间/" target="_blank">可用存储空间和总空间的查询</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/android存储/" class="color5">android存储</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/03/06/android内部存储/" class="archive-article-date">
-  <time datetime="2020-03-05T16:00:00.000Z" itemprop="datePublished">03-06</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/06/android内部存储/" target="_blank">android内部存储</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/android存储/" class="color5">android存储</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/01/25/Mac上Android源码下载编译导入AS教程/" class="archive-article-date">
-  <time datetime="2020-01-24T16:00:00.000Z" itemprop="datePublished">01-25</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/25/Mac上Android源码下载编译导入AS教程/" target="_blank">Android源码之下载编译导入AS（Mac版）</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/android源码/" class="color5">android源码</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/01/15/Android开发实践之通用Dialog封装/" class="archive-article-date">
-  <time datetime="2020-01-14T16:00:00.000Z" itemprop="datePublished">01-15</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/15/Android开发实践之通用Dialog封装/" target="_blank">Android开发实践之通用Dialog封装</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Dialog/" class="color2">Dialog</a>
-      
-    <a href="/tags/android控件/" class="color5">android控件</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">Next >></a>
-  </nav>
 </section>
         
       </div>
