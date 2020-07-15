@@ -8,18 +8,18 @@
   
     <meta name="keywords" content="Android技术博客,Android,个人博客">
   
-  <meta name="description" content="获取内部存储目录一般应用的内部存储会默认创建三个文件夹：cache，code_cache，files，应用安装的时候就会自动创建。 获取内部存储路径相关方法： 12345678910获取内存存储路径常用方法：Context#getFilesDir() // /data/user/0/[package-name]/filesContext#getCacheDir() // /data/user/0/">
+  <meta name="description" content="一、获取内部存储目录一般应用的内部存储会默认创建三个文件夹：cache，code_cache，files，应用安装的时候就会自动创建。 获取内部存储路径相关方法： 12345678910获取内存存储路径常用方法：Context#getFilesDir() // /data/user/0/[package-name]/filesContext#getCacheDir() // /data/user/">
 <meta name="keywords" content="android存储">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android内部存储">
 <meta property="og:url" content="https://www.johnnyit.cn/2020/03/06/android内部存储/index.html">
 <meta property="og:site_name" content="Johnny&#39;s Blog">
-<meta property="og:description" content="获取内部存储目录一般应用的内部存储会默认创建三个文件夹：cache，code_cache，files，应用安装的时候就会自动创建。 获取内部存储路径相关方法： 12345678910获取内存存储路径常用方法：Context#getFilesDir() // /data/user/0/[package-name]/filesContext#getCacheDir() // /data/user/0/">
+<meta property="og:description" content="一、获取内部存储目录一般应用的内部存储会默认创建三个文件夹：cache，code_cache，files，应用安装的时候就会自动创建。 获取内部存储路径相关方法： 12345678910获取内存存储路径常用方法：Context#getFilesDir() // /data/user/0/[package-name]/filesContext#getCacheDir() // /data/user/">
 <meta property="og:locale" content="CN">
-<meta property="og:updated_time" content="2020-07-14T14:51:27.984Z">
+<meta property="og:updated_time" content="2020-07-15T00:24:59.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android内部存储">
-<meta name="twitter:description" content="获取内部存储目录一般应用的内部存储会默认创建三个文件夹：cache，code_cache，files，应用安装的时候就会自动创建。 获取内部存储路径相关方法： 12345678910获取内存存储路径常用方法：Context#getFilesDir() // /data/user/0/[package-name]/filesContext#getCacheDir() // /data/user/0/">
+<meta name="twitter:description" content="一、获取内部存储目录一般应用的内部存储会默认创建三个文件夹：cache，code_cache，files，应用安装的时候就会自动创建。 获取内部存储路径相关方法： 12345678910获取内存存储路径常用方法：Context#getFilesDir() // /data/user/0/[package-name]/filesContext#getCacheDir() // /data/user/">
   
   
     <link rel="icon" href="/logo.png">
@@ -143,25 +143,24 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h2 id="获取内部存储目录"><a href="#获取内部存储目录" class="headerlink" title="获取内部存储目录"></a>获取内部存储目录</h2><p>一般应用的内部存储会默认创建三个文件夹：<code>cache</code>，<code>code_cache</code>，<code>files</code>，应用安装的时候就会自动创建。</p>
+            <h3 id="一、获取内部存储目录"><a href="#一、获取内部存储目录" class="headerlink" title="一、获取内部存储目录"></a>一、获取内部存储目录</h3><p>一般应用的内部存储会默认创建三个文件夹：<code>cache</code>，<code>code_cache</code>，<code>files</code>，应用安装的时候就会自动创建。</p>
 <p>获取内部存储路径相关方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">获取内存存储路径常用方法：</span><br><span class="line">Context#getFilesDir() // /data/user/0/[package-name]/files</span><br><span class="line">Context#getCacheDir() // /data/user/0/[package-name]/cache</span><br><span class="line">Context#getDir(xxx,mode) // /data/user/0/[package-name]/app_xxx</span><br><span class="line"></span><br><span class="line">Context#getDataDir() // /data/user/0/[package-name] 需要API 24</span><br><span class="line">Context#getCodeCacheDir() // /data/user/0/[package-name]/code_cache 需要API 21</span><br><span class="line">Environment.getDataDirectory() // /data</span><br><span class="line">Environment.getRootDirectory() // /system</span><br><span class="line">Environment.getDownloadCacheDirectory() // /data/cache</span><br></pre></td></tr></table></figure>
 <p>总结：</p>
 <blockquote>
 <p>一般通过Context来获取内部存储目录，最常用的就是上面提到的三个方法getFilesDir，getCacheDir，getDir</p>
 </blockquote>
-<p>&nbsp;</p>
 <p>当然了，如果你记性好的话也可以直接通过内部存储目录的绝对路径去<code>new</code>一个<code>File</code>，但是这种方式不建议使用，因为android设备非常的庞杂，再加上各个厂商的定制化，可能会导致你认为正确的路径到了其他手机上不好使了，会出现适配问题。</p>
 <p>&nbsp;</p>
-<h2 id="往内部存储空间写入文件"><a href="#往内部存储空间写入文件" class="headerlink" title="往内部存储空间写入文件"></a>往内部存储空间写入文件</h2><p>往内部存储空间写入文件的方式有很多种，我们可以分为两大类：一类是应用内存储文件，一类是应用间存储文件。</p>
-<h3 id="应用内存储文件"><a href="#应用内存储文件" class="headerlink" title="应用内存储文件"></a>应用内存储文件</h3><p>在应用内往内部存储空间中写入文件的方式有很多种，这里大概分为三类：</p>
+<h3 id="二、往内部存储空间写入文件"><a href="#二、往内部存储空间写入文件" class="headerlink" title="二、往内部存储空间写入文件"></a>二、往内部存储空间写入文件</h3><p>往内部存储空间写入文件的方式有很多种，我们可以分为两大类：一类是应用内存储文件，一类是应用间存储文件。</p>
+<h4 id="1、应用内存储文件"><a href="#1、应用内存储文件" class="headerlink" title="1、应用内存储文件"></a>1、应用内存储文件</h4><p>在应用内往内部存储空间中写入文件的方式有很多种，这里大概分为三类：</p>
 <ul>
 <li>标准输出流</li>
 <li><code>EncryptedFile</code>方式</li>
 <li><code>openFileOutput</code>方式</li>
 </ul>
 <p>&nbsp;</p>
-<p><strong>1.标准输出流</strong></p>
+<p><strong>a.标准输出流</strong></p>
 <p>实现步骤：</p>
 <ul>
 <li>通过<code>Context#getFilesDir()</code>、<code>Context#getCacheDir()</code>、<code>Context#getDir(xxx,mode)</code>获取文件目录<code>File</code>对象，有了<code>File</code>对象后我们也能拿到相应的路径；</li>
@@ -169,13 +168,14 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)))</span><br><span class="line"></span><br><span class="line">2.FileWriter(fileName, true)</span><br><span class="line"></span><br><span class="line">3.RandomAccessFile randomFile = new RandomAccessFile(fileName, &quot;rw&quot;);   </span><br><span class="line">// 文件长度，字节数</span><br><span class="line">long fileLength = randomFile.length();   </span><br><span class="line">// 将写文件指针移到文件尾。</span><br><span class="line">randomFile.seek(fileLength);</span><br><span class="line">randomFile.writeBytes(content); </span><br><span class="line"></span><br><span class="line">4.FileOutputStream fos = new FileOutputStream(fileName, true);</span><br><span class="line">fos.write(content);</span><br></pre></td></tr></table></figure>
 <p>&nbsp;</p>
-<p><strong>2.<code>EncryptedFile</code>方式</strong></p>
+<p><strong>b.<code>EncryptedFile</code>方式</strong></p>
 <p>这是官方建议使用的方式，更安全。<a href="https://developer.android.com/training/data-storage/files/internal?hl=zh-cn#WriteFileInternal" target="_blank" rel="noopener">官方使用EncryptedFile</a></p>
 <p>&nbsp;</p>
-<p><strong>3.<code>openFileOutput</code>方式</strong></p>
+<p><strong>c.<code>openFileOutput</code>方式</strong></p>
 <p>官方建议的另一种方式。<a href="https://developer.android.com/training/data-storage/files/internal?hl=zh-cn#WriteFileInternal" target="_blank" rel="noopener">openFileOutput方式</a></p>
 <p>&nbsp;</p>
 <p><strong>缓存文件存储</strong></p>
+<p><a href="https://developer.android.com/training/data-storage/files/internal?hl=zh-cn#WriteCacheFileInternal" target="_blank" rel="noopener">写入缓存文件</a></p>
 <p>应用内存储文件还需要说的一点就是对<strong>缓存文件</strong>的存储，应用的缓存我们一般存储在内部缓存即<code>Context#getCacheDir()</code>文件夹下，或者外部缓存即<code>Context#getExternalCacheDir()</code>下。我们可以使用如下方法存放缓存：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// For a more secure solution, use EncryptedFile from the Security library</span></span><br><span class="line">    <span class="comment">// instead of File.</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">getTempFile</span><span class="params">(context: <span class="type">Context</span>, url: <span class="type">String</span>)</span></span>: File? =</span><br><span class="line">            Uri.parse(url)?.lastPathSegment?.let &#123; filename -&gt;</span><br><span class="line">                File.createTempFile(filename, <span class="literal">null</span>, context.cacheDir)</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
 <p>缓存文件有两点需要我们注意：</p>
@@ -184,7 +184,7 @@
 <li>当系统的存储空间不足时，会在不发出警告的情况下删除掉缓存文件，所以请在读取缓存文件之前检查文件是否存在。</li>
 </ul>
 <p>&nbsp;</p>
-<h3 id="应用间存储文件"><a href="#应用间存储文件" class="headerlink" title="应用间存储文件"></a>应用间存储文件</h3><p>应用间存储文件的场景出现较多的是从应用A携带<code>Uri</code>给应用B，应用B做完某些操作后，向应用A传过来的<code>Uri</code>中存储数据。</p>
+<h4 id="2、应用间存储文件"><a href="#2、应用间存储文件" class="headerlink" title="2、应用间存储文件"></a>2、应用间存储文件</h4><p>应用间存储文件的场景出现较多的是从应用A携带<code>Uri</code>给应用B，应用B做完某些操作后，向应用A传过来的<code>Uri</code>中存储数据。</p>
 <p>最典型的就是应用调用系统相机拍照，我们需要给系统相机应用传一个照片输出路径<code>Uri</code>，系统相机拍完照片后就会把照片数据写入到这个<code>Uri</code>指向的文件。</p>
 <p>翻看Android 10和Android 6.0相机源码后，发现向<code>Uri</code>指定的文件中存储数据调用的API是相同的，下面是两个版本的源码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Android 6.0</span></span><br><span class="line">OutputStream outputStream = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">   outputStream = mContentResolver.openOutputStream(mSaveUri);</span><br><span class="line">   outputStream.write(data);</span><br><span class="line">   outputStream.close();</span><br><span class="line"></span><br><span class="line">   Log.v(TAG, <span class="string">"saved result to URI: "</span> + mSaveUri);</span><br><span class="line">   mActivity.setResultEx(Activity.RESULT_OK);</span><br><span class="line">   mActivity.finish();</span><br><span class="line">&#125; <span class="keyword">catch</span>(IOException ex) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Android 10</span></span><br><span class="line">OutputStream outputStream = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">   outputStream = mResourceConstructed.get().getContext().getContentResolver()</span><br><span class="line">                        .openOutputStream(saveUri.get());</span><br><span class="line">   outputStream.write(mPictureData);</span><br><span class="line">   outputStream.close();</span><br><span class="line"></span><br><span class="line">   Log.v(TAG, <span class="string">"saved result to URI: "</span> + saveUri);</span><br><span class="line">   <span class="keyword">return</span> Optional.of((State) StateIntentCompleted.from(</span><br><span class="line">                        <span class="keyword">this</span>, mResourceConstructed, <span class="keyword">new</span> Intent()));</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">   Log.e(TAG, <span class="string">"exception while saving result to URI: "</span> + saveUri, ex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -194,16 +194,14 @@
 <p>不论是向<code>file://</code>开头或者<code>content://</code>开头的<code>Uri</code>中写入数据都是调用<code>ContentResolver#openOutputStream(Uri)</code>方法。</p>
 </blockquote>
 <p>&nbsp;</p>
-<h2 id="从内部存储空间读取文件"><a href="#从内部存储空间读取文件" class="headerlink" title="从内部存储空间读取文件"></a>从内部存储空间读取文件</h2><p>&nbsp;</p>
-<h3 id="应用内读取文件"><a href="#应用内读取文件" class="headerlink" title="应用内读取文件"></a>应用内读取文件</h3><p>跟应用内存储文件刚好相反，应用内存储文件用到的方式，转换为输入流都可以用来读取文件，这里不再细说。</p>
+<h3 id="三、从内部存储空间读取文件"><a href="#三、从内部存储空间读取文件" class="headerlink" title="三、从内部存储空间读取文件"></a>三、从内部存储空间读取文件</h3><h4 id="1、应用内读取文件"><a href="#1、应用内读取文件" class="headerlink" title="1、应用内读取文件"></a>1、应用内读取文件</h4><p>跟应用内存储文件刚好相反，应用内存储文件用到的方式，转换为输入流都可以用来读取文件，这里不再细说。</p>
 <p>&nbsp;</p>
-<h3 id="应用间读取文件"><a href="#应用间读取文件" class="headerlink" title="应用间读取文件"></a>应用间读取文件</h3><p>应用间读取文件最常用的方式就是<code>ContentProvider</code>，当然，<code>ContentProvider</code>也能用来写入文件，前面应用间存储文件中说到了android 7.0之后应用间共享数据使用<code>content://</code>，准确来说应该是<code>content://</code>+<code>FileProvider</code>，这里的<code>FileProvider</code>就是一种<code>ContentProvider</code>。</p>
+<h4 id="2、应用间读取文件"><a href="#2、应用间读取文件" class="headerlink" title="2、应用间读取文件"></a>2、应用间读取文件</h4><p>应用间读取文件最常用的方式就是<code>ContentProvider</code>，当然，<code>ContentProvider</code>也能用来写入文件，前面应用间存储文件中说到了android 7.0之后应用间共享数据使用<code>content://</code>，准确来说应该是<code>content://</code>+<code>FileProvider</code>，这里的<code>FileProvider</code>就是一种<code>ContentProvider</code>。</p>
 <p>&nbsp;</p>
-<h2 id="删除内部存储文件"><a href="#删除内部存储文件" class="headerlink" title="删除内部存储文件"></a>删除内部存储文件</h2><p>&nbsp;</p>
-<h3 id="手动删除文件"><a href="#手动删除文件" class="headerlink" title="手动删除文件"></a>手动删除文件</h3><p>手动删除文件有两种方式：</p>
+<h3 id="四、删除内部存储文件"><a href="#四、删除内部存储文件" class="headerlink" title="四、删除内部存储文件"></a>四、删除内部存储文件</h3><h4 id="1、手动删除文件"><a href="#1、手动删除文件" class="headerlink" title="1、手动删除文件"></a>1、手动删除文件</h4><p>手动删除文件有两种方式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 最简单直接的方式</span><br><span class="line">File#delete()</span><br><span class="line"></span><br><span class="line">// 通过Context查找文件并删除</span><br><span class="line">Context#deleteFile(fileName)</span><br></pre></td></tr></table></figure>
 <p>&nbsp;</p>
-<h3 id="自动删除文件"><a href="#自动删除文件" class="headerlink" title="自动删除文件"></a>自动删除文件</h3><ul>
+<h4 id="2、自动删除文件"><a href="#2、自动删除文件" class="headerlink" title="2、自动删除文件"></a>2、自动删除文件</h4><ul>
 <li><p>对于存储在内部存储空间中的文件，会随着应用的卸载而删除；</p>
 </li>
 <li><p>存储在外部存储私有目录中的文件也会随着应用的卸载而删除，外部存储私有目录即<code>/storage/emulated/0/Android/data/[package-name]</code>；</p>
@@ -211,17 +209,17 @@
 <li>内部存储和外部存储中的缓存文件可能会在存储空间不足时自动删除。</li>
 </ul>
 <p>&nbsp;</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<h3 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h3><ul>
 <li>应用对内部存储空间文件的读取和写入不需要系统授予读写权限；</li>
 <li>应用内读写文件可以采用标准的输入输出流；</li>
 <li>应用间读写文件一般会采用<code>ContentProvider</code>；</li>
 </ul>
 <p>&nbsp;</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.android.com/training/data-storage/files/internal?hl=zh-cn" target="_blank" rel="noopener">官方文档：将文件保存到内部存储空间</a></p>
+<h3 id="六、参考"><a href="#六、参考" class="headerlink" title="六、参考"></a>六、参考</h3><p><a href="https://developer.android.com/training/data-storage/files/internal?hl=zh-cn" target="_blank" rel="noopener">官方文档：将文件保存到内部存储空间</a></p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年07月14日 22:51</p>
+        <p>最后更新： 2020年07月15日 08:24</p>
         <p>原始链接： <a class="post-url" href="/2020/03/06/android内部存储/" title="android内部存储">https://www.johnnyit.cn/2020/03/06/android内部存储/</a></p>
         <footer>
             <a href="https://www.johnnyit.cn">
@@ -339,7 +337,7 @@
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取内部存储目录"><span class="post-toc-text">获取内部存储目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#往内部存储空间写入文件"><span class="post-toc-text">往内部存储空间写入文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用内存储文件"><span class="post-toc-text">应用内存储文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用间存储文件"><span class="post-toc-text">应用间存储文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从内部存储空间读取文件"><span class="post-toc-text">从内部存储空间读取文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用内读取文件"><span class="post-toc-text">应用内读取文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用间读取文件"><span class="post-toc-text">应用间读取文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#删除内部存储文件"><span class="post-toc-text">删除内部存储文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#手动删除文件"><span class="post-toc-text">手动删除文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自动删除文件"><span class="post-toc-text">自动删除文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考"><span class="post-toc-text">参考</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、获取内部存储目录"><span class="post-toc-text">一、获取内部存储目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、往内部存储空间写入文件"><span class="post-toc-text">二、往内部存储空间写入文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、应用内存储文件"><span class="post-toc-text">1、应用内存储文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、应用间存储文件"><span class="post-toc-text">2、应用间存储文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、从内部存储空间读取文件"><span class="post-toc-text">三、从内部存储空间读取文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、应用内读取文件"><span class="post-toc-text">1、应用内读取文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、应用间读取文件"><span class="post-toc-text">2、应用间读取文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、删除内部存储文件"><span class="post-toc-text">四、删除内部存储文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、手动删除文件"><span class="post-toc-text">1、手动删除文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、自动删除文件"><span class="post-toc-text">2、自动删除文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、总结"><span class="post-toc-text">五、总结</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#六、参考"><span class="post-toc-text">六、参考</span></a></li></ol>
         </nav>
     </aside>
     
