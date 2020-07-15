@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Android的外部存储 | Johnny&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Android技术博客,Android,个人博客">
+  
+  <meta name="description" content="一、请求外部存储权限在说请求外部存储权限之前，我们需要明确两个知识点：外部存储私有目录和外部存储公开目录。 &amp;nbsp; 1.外部存储私有目录外部存储私有目录路径为：/storage/emulated/0/Android/data/[package-name]，从Android 4.4（API 19）开始，存放在私有目录下的文件读写是不需要系统授予读写权限的，这和内部存储一样，而且私有目录下的文件">
+<meta name="keywords" content="android存储">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android的外部存储">
+<meta property="og:url" content="https://www.johnnyit.cn/2020/03/09/android外部存储/index.html">
+<meta property="og:site_name" content="Johnny&#39;s Blog">
+<meta property="og:description" content="一、请求外部存储权限在说请求外部存储权限之前，我们需要明确两个知识点：外部存储私有目录和外部存储公开目录。 &amp;nbsp; 1.外部存储私有目录外部存储私有目录路径为：/storage/emulated/0/Android/data/[package-name]，从Android 4.4（API 19）开始，存放在私有目录下的文件读写是不需要系统授予读写权限的，这和内部存储一样，而且私有目录下的文件">
+<meta property="og:locale" content="CN">
+<meta property="og:updated_time" content="2020-07-15T08:03:33.305Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android的外部存储">
+<meta name="twitter:description" content="一、请求外部存储权限在说请求外部存储权限之前，我们需要明确两个知识点：外部存储私有目录和外部存储公开目录。 &amp;nbsp; 1.外部存储私有目录外部存储私有目录路径为：/storage/emulated/0/Android/data/[package-name]，从Android 4.4（API 19）开始，存放在私有目录下的文件读写是不需要系统授予读写权限的，这和内部存储一样，而且私有目录下的文件">
+  
+  
+    <link rel="icon" href="/logo.png">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Johnny&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Johnny&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        Android技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Sunny" target="_blank" href="//www.johnnyit.cn">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/NYSunny">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//weibo.com/u/5492265182/home?wvr=5">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-android外部存储" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Android的外部存储
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/android存储/">android存储</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-03-09
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="一、请求外部存储权限"><a href="#一、请求外部存储权限" class="headerlink" title="一、请求外部存储权限"></a>一、请求外部存储权限</h3><p>在说请求外部存储权限之前，我们需要明确两个知识点：外部存储私有目录和外部存储公开目录。</p>
+<p>&nbsp;</p>
+<h4 id="1-外部存储私有目录"><a href="#1-外部存储私有目录" class="headerlink" title="1.外部存储私有目录"></a>1.外部存储私有目录</h4><p>外部存储私有目录路径为：<code>/storage/emulated/0/Android/data/[package-name]</code>，从Android 4.4（API 19）开始，存放在私有目录下的文件读写是不需要系统授予读写权限的，这和内部存储一样，而且私有目录下的文件也会随应用卸载而删除。如果应用支持Android 4.3（API 18）及更低版本，并且您的应用需要访问私有目录，则应添加<code>maxSdkVersion</code>属性，声明仅在低版本的Android上请求权限：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- If you need to modify files in external storage, request</span></span><br><span class="line"><span class="comment">             WRITE_EXTERNAL_STORAGE instead. --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.READ_EXTERNAL_STORAGE"</span></span></span><br><span class="line"><span class="tag">                         <span class="attr">android:maxSdkVersion</span>=<span class="string">"18"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<h4 id="2-外部存储公开目录"><a href="#2-外部存储公开目录" class="headerlink" title="2.外部存储公开目录"></a>2.外部存储公开目录</h4><p>外部存储中除了私有目录就是公开目录了，应用对于公开目录中文件的读写需要系统授予读写权限，所以我们在对公开目录中文件进行读写前，要先申请读写权限：</p>
+<ul>
+<li><code>READ_EXTERNAL_STORAGE</code>：允许应用读取外部存储中的文件；</li>
+<li><code>WRITE_EXTERNAL_STORAGE</code>：允许应用写入或修改外部存储中的文件，拥有此权限的应用也会自动获得<code>READ_EXTERNAL_STORAGE</code>权限。</li>
+</ul>
+<p>Android 6.0之后需要动态申请权限。</p>
+<p>&nbsp;</p>
+<h3 id="二、验证外部存储是否可用"><a href="#二、验证外部存储是否可用" class="headerlink" title="二、验证外部存储是否可用"></a>二、验证外部存储是否可用</h3><p>在早期android设备上，外部存储是可移动的存储媒介（现在的设备可能也有），所以一般情况下我们访问外部存储空间之前应该验证外部存储是否可用。但现在大多数设备都对手机内置的存储空间划分出了“内部存储空间”和“外部存储空间”，所以验证外部存储是否可用这一步可以省略。</p>
+<p>以下方法可用于确定存储可用性：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Checks if external storage is available for read and write */</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">isExternalStorageWritable</span><span class="params">()</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Checks if external storage is available to at least read */</span></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">isExternalStorageReadable</span><span class="params">()</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">       <span class="keyword">return</span> Environment.getExternalStorageState() <span class="keyword">in</span></span><br><span class="line">          setOf(Environment.MEDIA_MOUNTED, Environment.MEDIA_MOUNTED_READ_ONLY)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<h3 id="三、获取外部存储目录"><a href="#三、获取外部存储目录" class="headerlink" title="三、获取外部存储目录"></a>三、获取外部存储目录</h3><p>&nbsp;</p>
+<h4 id="1-获取外部存储空间中的私有目录"><a href="#1-获取外部存储空间中的私有目录" class="headerlink" title="1.获取外部存储空间中的私有目录"></a>1.获取外部存储空间中的私有目录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// getExternalFilesDir()方法需要传入type参数，这个type参数可以是自定义的，也可以是Environment中定义的常量</span><br><span class="line">Context#getExternalFilesDir(&quot;&quot;) // /storage/emulated/0/Android/data/[package-name]/files</span><br><span class="line">Context#getExternalFilesDir(&quot;xx&quot;) // /storage/emulated/0/Android/data/[package-name]/files/xx</span><br><span class="line">Context#getExternalCacheDir() // /storage/emulated/0/Android/data/[package-name]/cache</span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<h4 id="2-获取外部存储空间中的公开目录"><a href="#2-获取外部存储空间中的公开目录" class="headerlink" title="2.获取外部存储空间中的公开目录"></a>2.获取外部存储空间中的公开目录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Environment.getExternalStorageDirectory() // /storage/emulated/0</span><br><span class="line">// getExternalStoragePublicDirectory方法中需要传入type参数，这个type参数可以自定义，也可以是Environment中定义的常量</span><br><span class="line">Environment.getExternalStoragePublicDirectory(&quot;&quot;) // /storage/emulated/0</span><br><span class="line">Environment.getExternalStoragePublicDirectory(&quot;xx&quot;) // /storage/emulated/0/xx</span><br></pre></td></tr></table></figure>
+<p>上面获取公开目录的两个方法在Android 10上被废弃了，也就是说在Android 10上访问公开目录是另一套机制，这里不细说。</p>
+<p>&nbsp;</p>
+<h3 id="四、向外部存储目录中写入文件"><a href="#四、向外部存储目录中写入文件" class="headerlink" title="四、向外部存储目录中写入文件"></a>四、向外部存储目录中写入文件</h3><p>&nbsp;</p>
+<h4 id="1-向外部存储私有目录写入文件"><a href="#1-向外部存储私有目录写入文件" class="headerlink" title="1.向外部存储私有目录写入文件"></a>1.向外部存储私有目录写入文件</h4><ul>
+<li>标准输出流</li>
+<li><a href="https://developer.android.com/training/data-storage/files/internal?hl=zh-cn#WriteFileInternal" target="_blank" rel="noopener">官方使用EncryptedFile的方式</a></li>
+<li><a href="https://developer.android.com/training/data-storage/files/internal?hl=zh-cn#WriteFileInternal" target="_blank" rel="noopener">官方使用openFileOutput方式</a></li>
+</ul>
+<p>&nbsp;</p>
+<h4 id="2-向外部存储公开目录写入文件"><a href="#2-向外部存储公开目录写入文件" class="headerlink" title="2.向外部存储公开目录写入文件"></a>2.向外部存储公开目录写入文件</h4><p>Android 10之前，能拿到公开目录的绝对路径且应用具有读写权限就能够对公开目录文件进行操作。</p>
+<p>Android 10之后，为了管理公开目录下文件以及数据的安全性，增加了<a href="https://developer.android.com/training/data-storage/files/external-scoped?hl=zh-cn" target="_blank" rel="noopener">分区存储</a>，我们需要按照分区存储的方式来读写公开目录中的文件。对于分区存储可以看看这篇文章：<a href="https://blog.csdn.net/sinyu890807/article/details/105419420/" target="_blank" rel="noopener">Android 10适配要点，作用域存储</a>。<strong>由于分区存储的特性，导致在Android 10之后，应用对于自己创建的文件进行读写是不需要读写权限的，不论是私有目录还是公开目录，但是要访问公开目录下其他应用创建的文件还是需要<code>READ_EXTERNAL_STOTAGE</code>权限。</strong></p>
+<p>&nbsp;</p>
+<h3 id="五、从外部存储目录中读取文件"><a href="#五、从外部存储目录中读取文件" class="headerlink" title="五、从外部存储目录中读取文件"></a>五、从外部存储目录中读取文件</h3><p>&nbsp;</p>
+<h4 id="1-从外部存储私有目录中读取文件"><a href="#1-从外部存储私有目录中读取文件" class="headerlink" title="1.从外部存储私有目录中读取文件"></a>1.从外部存储私有目录中读取文件</h4><ul>
+<li>标准输入流</li>
+<li>EncryptedFile</li>
+<li>openFileInput</li>
+</ul>
+<p>&nbsp;</p>
+<h4 id="2-从外部存储公开目录中读取文件"><a href="#2-从外部存储公开目录中读取文件" class="headerlink" title="2.从外部存储公开目录中读取文件"></a>2.从外部存储公开目录中读取文件</h4><p>这里会涉及到Android 10以前的版本和Android 10以后的版本，在Android 10之前，有读文件权限且拿到文件绝对路径就能够对文件进行读取，但在Android 10之后，我们需要按照分区存储的方式进行文件的读取。</p>
+<p>&nbsp;</p>
+<h3 id="六、删除外部存储目录中的文件"><a href="#六、删除外部存储目录中的文件" class="headerlink" title="六、删除外部存储目录中的文件"></a>六、删除外部存储目录中的文件</h3><p>对于外部存储私有目录中的文件进行删除操作时比较简单的，下面两种方案都可行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File#delete()</span><br><span class="line"></span><br><span class="line">Context#deleteFile(fileName)</span><br></pre></td></tr></table></figure>
+<p>但是由于Android 10版本之后分区存储，对于公开目录文件的删除操作可能会相对繁琐一些，这里不细说，会对Android 10之后的分区存储再做总结。</p>
+<p>&nbsp;</p>
+<h3 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h3><ul>
+<li>在不使用分区存储的情况下，对外部存储公开目录文件的读写是需要系统授予读写权限的</li>
+<li>使用分区存储，公开目录下对当前应用创建的文件不需要读写权限，但对其他应用创建的文件需要读写权限</li>
+<li>如果应用有文件存放在外部存储公开目录下，由于Android 10之后的分区存储，我们需要做好版本的适配工作，没有文件存放在外部存储公开目录的话，这块我们可以不去管它。</li>
+</ul>
+<p>&nbsp;</p>
+<h3 id="八、参考"><a href="#八、参考" class="headerlink" title="八、参考"></a>八、参考</h3><p><a href="https://developer.android.com/training/data-storage/files/external?hl=zh-cn#PublicFiles" target="_blank" rel="noopener">官方文档：将文件保存到外部存储</a></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年07月15日 16:03</p>
+        <p>原始链接： <a class="post-url" href="/2020/03/09/android外部存储/" title="Android的外部存储">https://www.johnnyit.cn/2020/03/09/android外部存储/</a></p>
+        <footer>
+            <a href="https://www.johnnyit.cn">
+                <img src="/images/logo.png" alt="Johnny">
+                Johnny
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2020/03/09/android外部存储/&title=《Android的外部存储》 — Johnny's Blog&pic=https://wx2.sbimg.cn/2020/06/25/ArrayList.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.johnnyit.cn/2020/03/09/android外部存储/&title=《Android的外部存储》 — Johnny's Blog&source=Android技术博客" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.johnnyit.cn/2020/03/09/android外部存储/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android的外部存储》 — Johnny's Blog&url=https://www.johnnyit.cn/2020/03/09/android外部存储/&via=https://www.johnnyit.cn" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.johnnyit.cn/2020/03/09/android外部存储/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.johnnyit.cn/2020/03/09/android外部存储/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/android存储/" class="color5">android存储</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、请求外部存储权限"><span class="post-toc-text">一、请求外部存储权限</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-外部存储私有目录"><span class="post-toc-text">1.外部存储私有目录</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-外部存储公开目录"><span class="post-toc-text">2.外部存储公开目录</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、验证外部存储是否可用"><span class="post-toc-text">二、验证外部存储是否可用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、获取外部存储目录"><span class="post-toc-text">三、获取外部存储目录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-获取外部存储空间中的私有目录"><span class="post-toc-text">1.获取外部存储空间中的私有目录</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-获取外部存储空间中的公开目录"><span class="post-toc-text">2.获取外部存储空间中的公开目录</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、向外部存储目录中写入文件"><span class="post-toc-text">四、向外部存储目录中写入文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-向外部存储私有目录写入文件"><span class="post-toc-text">1.向外部存储私有目录写入文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-向外部存储公开目录写入文件"><span class="post-toc-text">2.向外部存储公开目录写入文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、从外部存储目录中读取文件"><span class="post-toc-text">五、从外部存储目录中读取文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-从外部存储私有目录中读取文件"><span class="post-toc-text">1.从外部存储私有目录中读取文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-从外部存储公开目录中读取文件"><span class="post-toc-text">2.从外部存储公开目录中读取文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#六、删除外部存储目录中的文件"><span class="post-toc-text">六、删除外部存储目录中的文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#七、总结"><span class="post-toc-text">七、总结</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#八、参考"><span class="post-toc-text">八、参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2020/03/25/图床/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          图床
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2020/03/08/选择内部存储和外部存储/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">选择内部存储和外部存储</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2020 Johnny<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://www.johnnyit.cn",
+      animate: false,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/Android-Studio/">Android Studio</a><a class="category-link" href="/categories/Android第三方库使用/">Android第三方库使用</a><a class="category-link" href="/categories/AutoCompleteTextView/">AutoCompleteTextView</a><a class="category-link" href="/categories/Hexo/">Hexo</a><a class="category-link" href="/categories/Java基础/">Java基础</a><a class="category-link" href="/categories/android/">android</a><a class="category-link" href="/categories/android存储/">android存储</a><a class="category-link" href="/categories/android控件/">android控件</a><a class="category-link" href="/categories/android控件使用/">android控件使用</a><a class="category-link" href="/categories/android源码/">android源码</a><a class="category-link" href="/categories/android系统组件/">android系统组件</a><a class="category-link" href="/categories/git/">git</a><a class="category-link" href="/categories/github/">github</a><a class="category-link" href="/categories/函数式编程/">函数式编程</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android存储/" style="font-size: 16.67px;">android存储</a> <a href="/tags/android控件/" style="font-size: 13.33px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/android系统组件/" style="font-size: 13.33px;">android系统组件</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android存储/" style="font-size: 16.67px;">android存储</a> <a href="/tags/android控件/" style="font-size: 13.33px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/android系统组件/" style="font-size: 13.33px;">android系统组件</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
