@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>MeasureSpec源码解析 | Johnny&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Android技术博客,Android,个人博客">
+  
+  <meta name="description" content="一、MeasureSpec源码解析MeasureSpec源码不多，我们先贴出它的源码(这是API 28中的源码)：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576">
+<meta name="keywords" content="MeasureSpec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MeasureSpec源码解析">
+<meta property="og:url" content="https://www.johnnyit.cn/2020/08/01/MeasureSpec源码解析/index.html">
+<meta property="og:site_name" content="Johnny&#39;s Blog">
+<meta property="og:description" content="一、MeasureSpec源码解析MeasureSpec源码不多，我们先贴出它的源码(这是API 28中的源码)：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576">
+<meta property="og:locale" content="CN">
+<meta property="og:updated_time" content="2020-08-16T06:06:52.526Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MeasureSpec源码解析">
+<meta name="twitter:description" content="一、MeasureSpec源码解析MeasureSpec源码不多，我们先贴出它的源码(这是API 28中的源码)：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576">
+  
+  
+    <link rel="icon" href="/logo.png">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Johnny&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Johnny&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        Android技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Sunny" target="_blank" href="//www.johnnyit.cn">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/NYSunny">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//weibo.com/u/5492265182/home?wvr=5">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-MeasureSpec源码解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      MeasureSpec源码解析
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/View工作原理/">View工作原理</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-08-01
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="一、MeasureSpec源码解析"><a href="#一、MeasureSpec源码解析" class="headerlink" title="一、MeasureSpec源码解析"></a>一、MeasureSpec源码解析</h3><p>MeasureSpec源码不多，我们先贴出它的源码(这是API 28中的源码)：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MeasureSpec</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MODE_SHIFT = <span class="number">30</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MODE_MASK  = <span class="number">0x3</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** <span class="doctag">@hide</span> */</span></span><br><span class="line">    <span class="meta">@IntDef</span>(&#123;UNSPECIFIED, EXACTLY, AT_MOST&#125;)</span><br><span class="line">    <span class="meta">@Retention</span>(RetentionPolicy.SOURCE)</span><br><span class="line">    <span class="keyword">public</span> <span class="meta">@interface</span> MeasureSpecMode &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNSPECIFIED = <span class="number">0</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> EXACTLY     = <span class="number">1</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> AT_MOST     = <span class="number">2</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * Creates a measure specification based on the supplied size and mode.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * The mode must always be one of the following:</span></span><br><span class="line"><span class="comment">    * &lt;ul&gt;</span></span><br><span class="line"><span class="comment">    *  &lt;li&gt;&#123;<span class="doctag">@link</span> android.view.View.MeasureSpec#UNSPECIFIED&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">    *  &lt;li&gt;&#123;<span class="doctag">@link</span> android.view.View.MeasureSpec#EXACTLY&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">    *  &lt;li&gt;&#123;<span class="doctag">@link</span> android.view.View.MeasureSpec#AT_MOST&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">    * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; On API level 17 and lower, makeMeasureSpec's</span></span><br><span class="line"><span class="comment">    * implementation was such that the order of arguments did not matter</span></span><br><span class="line"><span class="comment">    * and overflow in either value could impact the resulting MeasureSpec.</span></span><br><span class="line"><span class="comment">    * &#123;<span class="doctag">@link</span> android.widget.RelativeLayout&#125; was affected by this bug.</span></span><br><span class="line"><span class="comment">    * Apps targeting API levels greater than 17 will get the fixed, more strict</span></span><br><span class="line"><span class="comment">    * behavior.&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> size the size of the measure specification</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> mode the mode of the measure specification</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> the measure specification based on size and mode</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">makeMeasureSpec</span><span class="params">(@IntRange(from = <span class="number">0</span>, to = (<span class="number">1</span> &lt;&lt; MeasureSpec.MODE_SHIFT)</span> - 1) <span class="keyword">int</span> size,</span></span><br><span class="line"><span class="function">                                          @MeasureSpecMode <span class="keyword">int</span> mode) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (sUseBrokenMakeMeasureSpec) &#123;</span><br><span class="line">            <span class="keyword">return</span> size + mode;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (size &amp; ~MODE_MASK) | (mode &amp; MODE_MASK);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">makeSafeMeasureSpec</span><span class="params">(<span class="keyword">int</span> size, <span class="keyword">int</span> mode)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (sUseZeroUnspecifiedMeasureSpec &amp;&amp; mode == UNSPECIFIED) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> makeMeasureSpec(size, mode);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getMode</span><span class="params">(<span class="keyword">int</span> measureSpec)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//noinspection ResourceType</span></span><br><span class="line">        <span class="keyword">return</span> (measureSpec &amp; MODE_MASK);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">(<span class="keyword">int</span> measureSpec)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (measureSpec &amp; ~MODE_MASK);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">adjust</span><span class="params">(<span class="keyword">int</span> measureSpec, <span class="keyword">int</span> delta)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> mode = getMode(measureSpec);</span><br><span class="line">        <span class="keyword">int</span> size = getSize(measureSpec);</span><br><span class="line">        <span class="keyword">if</span> (mode == UNSPECIFIED) &#123;</span><br><span class="line">            <span class="comment">// No need to adjust size for UNSPECIFIED mode.</span></span><br><span class="line">            <span class="keyword">return</span> makeMeasureSpec(size, UNSPECIFIED);</span><br><span class="line">        &#125;</span><br><span class="line">        size += delta;</span><br><span class="line">        <span class="keyword">if</span> (size &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            Log.e(VIEW_LOG_TAG, <span class="string">"MeasureSpec.adjust: new size would be negative! ("</span> + size +</span><br><span class="line">                        <span class="string">") spec: "</span> + toString(measureSpec) + <span class="string">" delta: "</span> + delta);</span><br><span class="line">            size = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> makeMeasureSpec(size, mode);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toString</span><span class="params">(<span class="keyword">int</span> measureSpec)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mode = getMode(measureSpec);</span><br><span class="line">        <span class="keyword">int</span> size = getSize(measureSpec);</span><br><span class="line"></span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="string">"MeasureSpec: "</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (mode == UNSPECIFIED)</span><br><span class="line">            sb.append(<span class="string">"UNSPECIFIED "</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (mode == EXACTLY)</span><br><span class="line">            sb.append(<span class="string">"EXACTLY "</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (mode == AT_MOST)</span><br><span class="line">            sb.append(<span class="string">"AT_MOST "</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            sb.append(mode).append(<span class="string">" "</span>);</span><br><span class="line"></span><br><span class="line">        sb.append(size);</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>抛开注释也才七十几行代码，下面我们来看看MeasureSpec类中的关键字段以及方法。</p>
+<p>先来看看我们常用的字段：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MODE_SHIFT = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MODE_MASK  = <span class="number">0x3</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** <span class="doctag">@hide</span> */</span></span><br><span class="line"><span class="meta">@IntDef</span>(&#123;UNSPECIFIED, EXACTLY, AT_MOST&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.SOURCE)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MeasureSpecMode &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNSPECIFIED = <span class="number">0</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> EXACTLY     = <span class="number">1</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> AT_MOST     = <span class="number">2</span> &lt;&lt; MODE_SHIFT;</span><br></pre></td></tr></table></figure></p>
+<p>网上很多博客都说<code>onMeasure(int,int)</code>方法的两个参数是测量模式与测量大小的“结合体”，从int类型的二进制角度来说就是高两位表示测量模式，低三十位表示测量大小，上面几个字段的定义也证明了这个说法是没问题的，我们首先来看<code>MODE_MASK</code>字段：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MODE_MASK = 0x3 &lt;&lt; 30 转为二进制表示就是</span><br><span class="line">11 000000000000000000000000000000</span><br></pre></td></tr></table></figure></p>
+<p>从这个值的设定来看，它能从一个32位的整数中换算出测量模式以及测量大小。</p>
+<p>我们再来看看三个测量模式静态常量：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** <span class="doctag">@hide</span> */</span></span><br><span class="line"><span class="meta">@IntDef</span>(&#123;UNSPECIFIED, EXACTLY, AT_MOST&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.SOURCE)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MeasureSpecMode &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNSPECIFIED = <span class="number">0</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> EXACTLY     = <span class="number">1</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> AT_MOST     = <span class="number">2</span> &lt;&lt; MODE_SHIFT;</span><br></pre></td></tr></table></figure></p>
+<p>我们把他们换算成二进制表示形式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** <span class="doctag">@hide</span> */</span></span><br><span class="line"><span class="meta">@IntDef</span>(&#123;UNSPECIFIED, EXACTLY, AT_MOST&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.SOURCE)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MeasureSpecMode &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNSPECIFIED = <span class="number">0b00</span> <span class="number">000000000000000000000000000000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> EXACTLY     = <span class="number">0b01</span> <span class="number">000000000000000000000000000000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> AT_MOST     = <span class="number">0b10</span> <span class="number">000000000000000000000000000000</span>;</span><br></pre></td></tr></table></figure></p>
+<p>先别急着拿他们去和<code>MODE_MASK</code>做运算，我们再来看看MeasureSpec中的几个我们常用的方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">makeMeasureSpec</span><span class="params">(@IntRange(from = <span class="number">0</span>, to = (<span class="number">1</span> &lt;&lt; MeasureSpec.MODE_SHIFT)</span> - 1) <span class="keyword">int</span> size,</span></span><br><span class="line"><span class="function">                                          @MeasureSpecMode <span class="keyword">int</span> mode) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sUseBrokenMakeMeasureSpec) &#123;</span><br><span class="line">        <span class="keyword">return</span> size + mode;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (size &amp; ~MODE_MASK) | (mode &amp; MODE_MASK);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>sUseBrokenMakeMeasureSpec</code>：这是View中的静态常量，表示是否使用旧版本的方式去计算MeasureSpec的值，旧版本是多少呢？我们找找View中<code>sUseBrokenMakeMeasureSpec</code>变量是在哪儿赋值的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* Use the old (broken) way of building MeasureSpecs.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> sUseBrokenMakeMeasureSpec = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">View</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="comment">// public static final int JELLY_BEAN_MR1 = 17;</span></span><br><span class="line">sUseBrokenMakeMeasureSpec = targetSdkVersion &lt;= Build.VERSION_CODES.JELLY_BEAN_MR1;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>所以说，targetSdkVersion小于等于API 17的话会使用<code>mode + size</code>的方式计算MeasureSpec的值，但是这种计算方式是存在bug的，<code>makeMeasureSpec(int,int)</code>方法的注释已经告知我们这些了：<code>mode + size</code>的计算方式可能会存在值溢出的情况，而且已经在<code>RelativeLayout</code>中出现这样的bug了。</p>
+<p>值溢出是什么意思？</p>
+<p>int型的MeasureSpec值的高两位表示mode，低三十位表示size，但是如果size值超出了30位能够表示的范围，就会进位到高两位区域，这样<code>mode + size</code>的结果破坏了mode的值，比如这样：mode值为<code>10 000000000000000000000000000000</code>，但是size的值为<code>01 000000000000000000000000000001</code>，那么<code>mode + size</code>就等于<code>11 000000000000000000000000000001</code>，代码在解析这个MeasureSpec值表示的mode时发现是<code>11 000000000000000000000000000000</code>，这是一个不存在的mode值，必然会导致View测量的错误。</p>
+<p>高于API 17的版本已经修复这个问题了，从<code>makeMeasureSpec(int,int)</code>方法中我们可以看到它是这样计算MeasureSpec值的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(size &amp; ~MODE_MASK) | (mode &amp; MODE_MASK)</span><br></pre></td></tr></table></figure></p>
+<p>我们把这个表达式分为两部分来看，先看第一部分：<code>size &amp; ~MODE_MASK</code>，从算术运算符的优先级来看，先对<code>MODE_MASK</code>取反，取反结果是<code>00 111111111111111111111111111111</code>，在拿这个结果与size进行<code>&amp;</code>操作，就能得到size的低30位值，即使size的值大于30位能够表示的范围那也支取低30位的值，高两位的值丢弃，这样保证了mode值的正确性，而且size值大于30位能够表示的范围不常见。</p>
+<p>第二部分则是<code>mode &amp; MODE_MASK</code>，mode值与<code>11 000000000000000000000000000000</code>做<code>&amp;</code>运算，结果得到的就是高两位表示的值，即<code>UNSPECIFIED/EXACTLY/AT_MOST</code>三个值之一。</p>
+<p>最后把上面得到的两个值做<code>|</code>运算，即32位整数的高两位用mode的值，低三十位用size的值，这样就得到了MeasureSpec。</p>
+<p><strong>总结：</strong><br><code>onMeasure(int,int)</code>方法的两个参数是测量模式和测量大小的“结合体”，即高两位表示的是测量模式，低三十位表示的是测量大小。</p>
+<p>接下来我们再来看看<code>getMode(int)</code>和<code>getSize(int)</code>两个方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getMode</span><span class="params">(<span class="keyword">int</span> measureSpec)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//noinspection ResourceType</span></span><br><span class="line">    <span class="keyword">return</span> (measureSpec &amp; MODE_MASK);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">(<span class="keyword">int</span> measureSpec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (measureSpec &amp; ~MODE_MASK);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>getMode(int)</code>中是把measureSpec值与<code>MODE_MASK</code>做<code>&amp;</code>运算，这样就把measureSpec中关于size的低三十位值过滤掉，全部变为0，保留高两位的值，这样即获得了测量模式的值。</p>
+<p><code>getSize(int)</code>中是先把<code>MODE_MASK</code>做取反操作，得到<code>00 111111111111111111111111111111</code>，再与measureSpec做<code>&amp;</code>操作，这样能把measureSpec中高两位值过滤掉，全部变为0，保留低三十位值，即测量大小的值。</p>
+<p>上面三个方法就是我们平常开发中经常接触的方法，接下里我们再来看看MeasureSpec中其余三个方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">makeSafeMeasureSpec</span><span class="params">(<span class="keyword">int</span> size, <span class="keyword">int</span> mode)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">adjust</span><span class="params">(<span class="keyword">int</span> measureSpec, <span class="keyword">int</span> delta)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toString</span><span class="params">(<span class="keyword">int</span> measureSpec)</span></span></span><br></pre></td></tr></table></figure></p>
+<p><code>makeSafeMeasureSpec(int size, int mode)</code>是一个<code>hide</code>方法，仅供源码内部调用，但是从源码中我没有发现有调用这个方法的地方，囧…不过我们还是简单来看看吧，手动无聊…</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">makeSafeMeasureSpec</span><span class="params">(<span class="keyword">int</span> size, <span class="keyword">int</span> mode)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sUseZeroUnspecifiedMeasureSpec &amp;&amp; mode == UNSPECIFIED) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> makeMeasureSpec(size, mode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>sUseZeroUnspecifiedMeasureSpec</code>是View中的静态常量，从这个常量的注释上来看大概意思是这样的：用0表示mode为UNSPECIFIED的MeasureSpec值，它是什么时候被赋值的呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* Always return a size of 0 for MeasureSpec values with a mode of UNSPECIFIED</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">boolean</span> sUseZeroUnspecifiedMeasureSpec = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">View</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="comment">// public static final int M = 23;</span></span><br><span class="line">sUseZeroUnspecifiedMeasureSpec = targetSdkVersion &lt; Build.VERSION_CODES.M;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即API小于23的时候会使用这种表示方法，大于23使用正常的<code>makeMeasureSpec(int size,int mode)</code>生成MeasureSpec值。</p>
+<p><strong><code>adjust(int measureSpec, int delta)</code>方法：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">adjust</span><span class="params">(<span class="keyword">int</span> measureSpec, <span class="keyword">int</span> delta)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> mode = getMode(measureSpec);</span><br><span class="line">    <span class="keyword">int</span> size = getSize(measureSpec);</span><br><span class="line">    <span class="keyword">if</span> (mode == UNSPECIFIED) &#123;</span><br><span class="line">        <span class="comment">// No need to adjust size for UNSPECIFIED mode.</span></span><br><span class="line">        <span class="keyword">return</span> makeMeasureSpec(size, UNSPECIFIED);</span><br><span class="line">    &#125;</span><br><span class="line">    size += delta;</span><br><span class="line">    <span class="keyword">if</span> (size &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        Log.e(VIEW_LOG_TAG, <span class="string">"MeasureSpec.adjust: new size would be negative! ("</span> + size +</span><br><span class="line">                        <span class="string">") spec: "</span> + toString(measureSpec) + <span class="string">" delta: "</span> + delta);</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> makeMeasureSpec(size, mode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从方法实现上来看该方法是用来调整MeasureSpec中size大小的，然后重新生成新的MeasureSpec返回。</p>
+<p>该方法是在<code>measure(int,int)</code>方法中有调用，具体用处后面分析View测量过程时再细说。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">measure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> optical = isLayoutModeOptical(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">if</span> (optical != isLayoutModeOptical(mParent)) &#123;</span><br><span class="line">        Insets insets = getOpticalInsets();</span><br><span class="line">        <span class="keyword">int</span> oWidth  = insets.left + insets.right;</span><br><span class="line">        <span class="keyword">int</span> oHeight = insets.top  + insets.bottom;</span><br><span class="line">        <span class="comment">// this</span></span><br><span class="line">        widthMeasureSpec  = MeasureSpec.adjust(widthMeasureSpec,  optical ? -oWidth  : oWidth);</span><br><span class="line">        heightMeasureSpec = MeasureSpec.adjust(heightMeasureSpec, optical ? -oHeight : oHeight);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong><code>String toString(int measureSpec)</code>方法：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toString</span><span class="params">(<span class="keyword">int</span> measureSpec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mode = getMode(measureSpec);</span><br><span class="line">    <span class="keyword">int</span> size = getSize(measureSpec);</span><br><span class="line"></span><br><span class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="string">"MeasureSpec: "</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (mode == UNSPECIFIED)</span><br><span class="line">        sb.append(<span class="string">"UNSPECIFIED "</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (mode == EXACTLY)</span><br><span class="line">        sb.append(<span class="string">"EXACTLY "</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (mode == AT_MOST)</span><br><span class="line">        sb.append(<span class="string">"AT_MOST "</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        sb.append(mode).append(<span class="string">" "</span>);</span><br><span class="line"></span><br><span class="line">    sb.append(size);</span><br><span class="line">    <span class="keyword">return</span> sb.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>toString方法似乎没有什么好说的，打印出了MeasureSpec的一些关键信息。</p>
+<h3 id="二、总结"><a href="#二、总结" class="headerlink" title="二、总结"></a>二、总结</h3><p>从MeasureSpec的源码来看，计算MeasureSpec值的过程并不复杂，从计算过程中我们了解到int类型的measureSpec值高两位表示的是测量模式，低三十位的值表示测量大小；</p>
+<p>系统为保证测量模式的正确性在测量大小大于int类型低30位能够表示的范围时会把超过30位的值直接截取丢弃，只保留低30位的值，因此，自定义View时View的大小尽量保证在低30位的范围内(不过一般都不会超过30位，超过了那得是多大的值)。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年08月16日 14:06</p>
+        <p>原始链接： <a class="post-url" href="/2020/08/01/MeasureSpec源码解析/" title="MeasureSpec源码解析">https://www.johnnyit.cn/2020/08/01/MeasureSpec源码解析/</a></p>
+        <footer>
+            <a href="https://www.johnnyit.cn">
+                <img src="/images/logo.png" alt="Johnny">
+                Johnny
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2020/08/01/MeasureSpec源码解析/&title=《MeasureSpec源码解析》 — Johnny's Blog&pic=https://wx2.sbimg.cn/2020/06/25/ArrayList.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.johnnyit.cn/2020/08/01/MeasureSpec源码解析/&title=《MeasureSpec源码解析》 — Johnny's Blog&source=Android技术博客" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.johnnyit.cn/2020/08/01/MeasureSpec源码解析/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MeasureSpec源码解析》 — Johnny's Blog&url=https://www.johnnyit.cn/2020/08/01/MeasureSpec源码解析/&via=https://www.johnnyit.cn" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.johnnyit.cn/2020/08/01/MeasureSpec源码解析/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.johnnyit.cn/2020/08/01/MeasureSpec源码解析/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/MeasureSpec/" class="color2">MeasureSpec</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、MeasureSpec源码解析"><span class="post-toc-text">一、MeasureSpec源码解析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、总结"><span class="post-toc-text">二、总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/06/ViewHolder那些事儿/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">ViewHolder那些事儿</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2020 Johnny<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://www.johnnyit.cn",
+      animate: false,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/Android-Studio/">Android Studio</a><a class="category-link" href="/categories/Android第三方库使用/">Android第三方库使用</a><a class="category-link" href="/categories/AutoCompleteTextView/">AutoCompleteTextView</a><a class="category-link" href="/categories/Hexo/">Hexo</a><a class="category-link" href="/categories/Java基础/">Java基础</a><a class="category-link" href="/categories/View工作原理/">View工作原理</a><a class="category-link" href="/categories/android/">android</a><a class="category-link" href="/categories/android存储/">android存储</a><a class="category-link" href="/categories/android控件/">android控件</a><a class="category-link" href="/categories/android控件使用/">android控件使用</a><a class="category-link" href="/categories/android源码/">android源码</a><a class="category-link" href="/categories/android系统组件/">android系统组件</a><a class="category-link" href="/categories/git/">git</a><a class="category-link" href="/categories/github/">github</a><a class="category-link" href="/categories/函数式编程/">函数式编程</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/MeasureSpec/" style="font-size: 10px;">MeasureSpec</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android存储/" style="font-size: 16.67px;">android存储</a> <a href="/tags/android控件/" style="font-size: 13.33px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/android系统组件/" style="font-size: 13.33px;">android系统组件</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/MeasureSpec/" style="font-size: 10px;">MeasureSpec</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android存储/" style="font-size: 16.67px;">android存储</a> <a href="/tags/android控件/" style="font-size: 13.33px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/android系统组件/" style="font-size: 13.33px;">android系统组件</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
