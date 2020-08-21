@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>设计模式之依赖倒置原则 | Johnny&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Android技术博客,Android,个人博客">
+  
+  <meta name="description" content="一、高层(上层)和低层(下层)的理解可以简单的理解为调用者为高层(上层)，被调用者为低层(下层)，比如class A中有对class B的引用，可能为强引用(类成员变量)，或者Class B作为class A中方法的参数或者局部变量，这些情况下，class A可以叫做高层模块，class B叫做低层模块，class A中使用到了class B。 理解了这两个概念之后应该更容易理解依赖倒置原则了">
+<meta name="keywords" content="依赖倒置原则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之依赖倒置原则">
+<meta property="og:url" content="https://www.johnnyit.cn/2019/04/09/设计模式之依赖倒置原则解析/index.html">
+<meta property="og:site_name" content="Johnny&#39;s Blog">
+<meta property="og:description" content="一、高层(上层)和低层(下层)的理解可以简单的理解为调用者为高层(上层)，被调用者为低层(下层)，比如class A中有对class B的引用，可能为强引用(类成员变量)，或者Class B作为class A中方法的参数或者局部变量，这些情况下，class A可以叫做高层模块，class B叫做低层模块，class A中使用到了class B。 理解了这两个概念之后应该更容易理解依赖倒置原则了">
+<meta property="og:locale" content="CN">
+<meta property="og:updated_time" content="2020-08-21T11:31:46.300Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式之依赖倒置原则">
+<meta name="twitter:description" content="一、高层(上层)和低层(下层)的理解可以简单的理解为调用者为高层(上层)，被调用者为低层(下层)，比如class A中有对class B的引用，可能为强引用(类成员变量)，或者Class B作为class A中方法的参数或者局部变量，这些情况下，class A可以叫做高层模块，class B叫做低层模块，class A中使用到了class B。 理解了这两个概念之后应该更容易理解依赖倒置原则了">
+  
+  
+    <link rel="icon" href="/logo.png">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Johnny&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Johnny&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        Android技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Sunny" target="_blank" href="//www.johnnyit.cn">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/NYSunny">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//weibo.com/u/5492265182/home?wvr=5">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-设计模式之依赖倒置原则解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      设计模式之依赖倒置原则
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/设计模式/">设计模式</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-04-09
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="一、高层-上层-和低层-下层-的理解"><a href="#一、高层-上层-和低层-下层-的理解" class="headerlink" title="一、高层(上层)和低层(下层)的理解"></a>一、高层(上层)和低层(下层)的理解</h3><p>可以简单的理解为调用者为高层(上层)，被调用者为低层(下层)，比如class A中有对class B的引用，可能为强引用(类成员变量)，或者Class B作为class A中方法的参数或者局部变量，这些情况下，class A可以叫做高层模块，class B叫做低层模块，class A中使用到了class B。</p>
+<p>理解了这两个概念之后应该更容易理解依赖倒置原则了。</p>
+<h3 id="二、依赖倒置原则的三层含义"><a href="#二、依赖倒置原则的三层含义" class="headerlink" title="二、依赖倒置原则的三层含义"></a>二、依赖倒置原则的三层含义</h3><ul>
+<li><p>高层模块不应该直接依赖于低层模块，应该依赖于低层模块的抽象(抽象类或接口)</p>
+</li>
+<li><p>抽象不应该依赖于细节</p>
+</li>
+<li><p>细节应该依赖于抽象(抽象类或接口)</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<p>在Java语言中，抽象就是指抽象类或接口，它们是不能被实例化的，细节就是具体的实现类，那么上面的三层含义在Java语言中的应用就是：</p>
+<ul>
+<li><p>模块间的依赖是通过抽象发生，实现类之间不发生直接依赖关系</p>
+</li>
+<li><p>抽象类或接口不依赖于具体的实现类</p>
+</li>
+<li><p>实现类依赖于抽象类或接口</p>
+</li>
+</ul>
+<p>这种思想就是面向接口编程(OOD)</p>
+<h3 id="三、DIP的几种写法"><a href="#三、DIP的几种写法" class="headerlink" title="三、DIP的几种写法"></a>三、DIP的几种写法</h3><h4 id="1-抽象高层和低层模块-或者只抽象低层模块-，通过构造函数传递依赖对象-构造器注入"><a href="#1-抽象高层和低层模块-或者只抽象低层模块-，通过构造函数传递依赖对象-构造器注入" class="headerlink" title="1.抽象高层和低层模块(或者只抽象低层模块)，通过构造函数传递依赖对象(构造器注入)"></a>1.抽象高层和低层模块(或者只抽象低层模块)，通过构造函数传递依赖对象(构造器注入)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 汽车接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ICar</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 驾驶员接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IDriver</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 驾驶员实现类调用汽车对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XiaoMing</span> <span class="keyword">implements</span> <span class="title">IDriver</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ICar mCar;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过构造器注入对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">XiaoMing</span><span class="params">(ICar car)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mCar = car;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mCar.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-在申明接口的同时也申明依赖对象"><a href="#2-在申明接口的同时也申明依赖对象" class="headerlink" title="2.在申明接口的同时也申明依赖对象"></a>2.在申明接口的同时也申明依赖对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 汽车接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ICar</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 驾驶员接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IDriver</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">drive</span><span class="params">(ICar car)</span></span>; <span class="comment">// 申明依赖对象</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 驾驶员实现类调用汽车对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XiaoMing</span> <span class="keyword">implements</span> <span class="title">IDriver</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">(ICar car)</span> </span>&#123;</span><br><span class="line">        car.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-通过setter方法依赖对象"><a href="#3-通过setter方法依赖对象" class="headerlink" title="3.通过setter方法依赖对象"></a>3.通过setter方法依赖对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 汽车接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ICar</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 驾驶员接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IDriver</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 驾驶员实现类调用汽车对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XiaoMing</span> <span class="keyword">implements</span> <span class="title">IDriver</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ICar mCar;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过setter方法注入依赖对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCar</span><span class="params">(ICar car)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mCar = car;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mCar.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="四、疑问"><a href="#四、疑问" class="headerlink" title="四、疑问"></a>四、疑问</h3><p>依赖倒置原则中所谓的倒置体现在哪儿？</p>
+<p>从上面一大段的介绍中并没有体现依赖的“倒置”到底在哪儿，更多的感受是这个原则其实就是面向接口编程，把原来依赖于具体实现类的方式改为了依赖抽象，即抽象依赖原则，并没有所谓的“倒置”。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年08月21日 19:31</p>
+        <p>原始链接： <a class="post-url" href="/2019/04/09/设计模式之依赖倒置原则解析/" title="设计模式之依赖倒置原则">https://www.johnnyit.cn/2019/04/09/设计模式之依赖倒置原则解析/</a></p>
+        <footer>
+            <a href="https://www.johnnyit.cn">
+                <img src="/images/logo.png" alt="Johnny">
+                Johnny
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2019/04/09/设计模式之依赖倒置原则解析/&title=《设计模式之依赖倒置原则》 — Johnny's Blog&pic=https://wx2.sbimg.cn/2020/06/25/ArrayList.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.johnnyit.cn/2019/04/09/设计模式之依赖倒置原则解析/&title=《设计模式之依赖倒置原则》 — Johnny's Blog&source=Android技术博客" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.johnnyit.cn/2019/04/09/设计模式之依赖倒置原则解析/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式之依赖倒置原则》 — Johnny's Blog&url=https://www.johnnyit.cn/2019/04/09/设计模式之依赖倒置原则解析/&via=https://www.johnnyit.cn" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.johnnyit.cn/2019/04/09/设计模式之依赖倒置原则解析/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.johnnyit.cn/2019/04/09/设计模式之依赖倒置原则解析/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/依赖倒置原则/" class="color2">依赖倒置原则</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、高层-上层-和低层-下层-的理解"><span class="post-toc-text">一、高层(上层)和低层(下层)的理解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、依赖倒置原则的三层含义"><span class="post-toc-text">二、依赖倒置原则的三层含义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、DIP的几种写法"><span class="post-toc-text">三、DIP的几种写法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-抽象高层和低层模块-或者只抽象低层模块-，通过构造函数传递依赖对象-构造器注入"><span class="post-toc-text">1.抽象高层和低层模块(或者只抽象低层模块)，通过构造函数传递依赖对象(构造器注入)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-在申明接口的同时也申明依赖对象"><span class="post-toc-text">2.在申明接口的同时也申明依赖对象</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-通过setter方法依赖对象"><span class="post-toc-text">3.通过setter方法依赖对象</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、疑问"><span class="post-toc-text">四、疑问</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2019/04/21/关于基本数据类型和数组需要注意的问题/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          关于基本数据类型和数组需要注意的问题
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2018/03/31/Bitmap压缩策略/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Bitmap压缩策略</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2020 Johnny<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://www.johnnyit.cn",
+      animate: false,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/Android-Studio/">Android Studio</a><a class="category-link" href="/categories/Android第三方库使用/">Android第三方库使用</a><a class="category-link" href="/categories/AutoCompleteTextView/">AutoCompleteTextView</a><a class="category-link" href="/categories/Hexo/">Hexo</a><a class="category-link" href="/categories/Java基础/">Java基础</a><a class="category-link" href="/categories/View工作原理/">View工作原理</a><a class="category-link" href="/categories/android/">android</a><a class="category-link" href="/categories/android存储/">android存储</a><a class="category-link" href="/categories/android控件/">android控件</a><a class="category-link" href="/categories/android控件使用/">android控件使用</a><a class="category-link" href="/categories/android源码/">android源码</a><a class="category-link" href="/categories/android系统组件/">android系统组件</a><a class="category-link" href="/categories/git/">git</a><a class="category-link" href="/categories/github/">github</a><a class="category-link" href="/categories/函数式编程/">函数式编程</a><a class="category-link" href="/categories/设计模式/">设计模式</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/MeasureSpec/" style="font-size: 10px;">MeasureSpec</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android存储/" style="font-size: 16.67px;">android存储</a> <a href="/tags/android控件/" style="font-size: 13.33px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/android系统组件/" style="font-size: 13.33px;">android系统组件</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/依赖倒置原则/" style="font-size: 10px;">依赖倒置原则</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/ArrayList源码/" style="font-size: 10px;">ArrayList源码</a> <a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/FragmentTabHost/" style="font-size: 10px;">FragmentTabHost</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/Java异常/" style="font-size: 10px;">Java异常</a> <a href="/tags/Java继承/" style="font-size: 10px;">Java继承</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/MeasureSpec/" style="font-size: 10px;">MeasureSpec</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/StringBuilder类/" style="font-size: 10px;">StringBuilder类</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/android存储/" style="font-size: 16.67px;">android存储</a> <a href="/tags/android控件/" style="font-size: 13.33px;">android控件</a> <a href="/tags/android源码/" style="font-size: 10px;">android源码</a> <a href="/tags/android系统组件/" style="font-size: 13.33px;">android系统组件</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/依赖倒置原则/" style="font-size: 10px;">依赖倒置原则</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/基本数据类型/" style="font-size: 10px;">基本数据类型</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/浅拷贝/" style="font-size: 10px;">浅拷贝</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/第三方库/" style="font-size: 10px;">第三方库</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
