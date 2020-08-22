@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Johnny&#39;s Blog">
 <meta property="og:description" content="一、前言工厂模式分三种：简单工厂模式、工厂方法模式、抽象工厂模式，它们都属于设计模式中的创建型模式。 它的主要功能就是帮助把对象的实例化部分抽取出来，用工厂去统一的管理对象的实例化，这样减少了调用者对实际对象的依赖（仅依赖于接口），降低了代码的耦合。 二、简单工厂模式简单工厂模式示例： 产品接口类，比如生产汽车，该接口的作用在于定义汽车这个产品有哪些行为特性，一个接口代表一类产品： 1234567">
 <meta property="og:locale" content="CN">
-<meta property="og:updated_time" content="2020-08-22T10:37:21.489Z">
+<meta property="og:updated_time" content="2020-08-22T10:55:06.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式之工厂模式">
 <meta name="twitter:description" content="一、前言工厂模式分三种：简单工厂模式、工厂方法模式、抽象工厂模式，它们都属于设计模式中的创建型模式。 它的主要功能就是帮助把对象的实例化部分抽取出来，用工厂去统一的管理对象的实例化，这样减少了调用者对实际对象的依赖（仅依赖于接口），降低了代码的耦合。 二、简单工厂模式简单工厂模式示例： 产品接口类，比如生产汽车，该接口的作用在于定义汽车这个产品有哪些行为特性，一个接口代表一类产品： 1234567">
@@ -177,7 +177,11 @@
 <p>按照超级工厂接口类的要求新建不同的超级工厂以生产不同种类不同品种的产品（一个超级工厂能够生产不同种类的某品种产品，不同超级工厂就能够生产不同种类不同品种的产品）：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SuperFactory01</span> <span class="keyword">implements</span> <span class="title">Factory</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ICar <span class="title">createCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MiniBus();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IComputer <span class="title">createComputer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> LenovoComputer();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SuperFactory02</span> <span class="keyword">implements</span> <span class="title">Factory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ICar <span class="title">createCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Trucks();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IComputer <span class="title">createComputer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AppleComputer();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>比如上面的超级工厂01就能够生产汽车这一类的小客车，还能够生产电脑这一类的联想电脑，超级工厂02则能够生产汽车一类的货车，电脑一类的苹果电脑。</p>
-<h3 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h3><p>从工厂方法模式和抽象工厂模式的实现上，我们发现：</p>
+<h3 id="六、工厂模式在Android中的应用"><a href="#六、工厂模式在Android中的应用" class="headerlink" title="六、工厂模式在Android中的应用"></a>六、工厂模式在Android中的应用</h3><p><code>LayoutInflater.Factory</code>：它提供了在布局加载过程中拦截View的一种机制，<code>LayoutInflater.Factory</code>的定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Factory &#123;</span><br><span class="line">		@Nullable</span><br><span class="line">    View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>它是一种工厂方法模式。</p>
+<p>在Java线程池中有一个参数可以传递<code>ThreadFactory</code>对象，它是一个工厂类对象，用来生产不同的线程，它也是工厂方法模式的一种应用。</p>
+<h3 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h3><p>从工厂方法模式和抽象工厂模式的实现上，我们发现：</p>
 <ul>
 <li>工厂方法模式利用继承，抽象工厂模式利用组合；</li>
 <li>工厂方法模式产生一个对象，抽象工厂模式产生一族对象；</li>
@@ -187,7 +191,7 @@
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年08月22日 18:37</p>
+        <p>最后更新： 2020年08月22日 18:55</p>
         <p>原始链接： <a class="post-url" href="/2019/04/13/设计模式之工厂模式/" title="设计模式之工厂模式">https://www.johnnyit.cn/2019/04/13/设计模式之工厂模式/</a></p>
         <footer>
             <a href="https://www.johnnyit.cn">
@@ -305,7 +309,7 @@
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、简单工厂模式"><span class="post-toc-text">二、简单工厂模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、工厂方法模式"><span class="post-toc-text">三、工厂方法模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、抽象工厂模式"><span class="post-toc-text">四、抽象工厂模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、总结"><span class="post-toc-text">五、总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、简单工厂模式"><span class="post-toc-text">二、简单工厂模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、工厂方法模式"><span class="post-toc-text">三、工厂方法模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、抽象工厂模式"><span class="post-toc-text">四、抽象工厂模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#六、工厂模式在Android中的应用"><span class="post-toc-text">六、工厂模式在Android中的应用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#七、总结"><span class="post-toc-text">七、总结</span></a></li></ol>
         </nav>
     </aside>
     
