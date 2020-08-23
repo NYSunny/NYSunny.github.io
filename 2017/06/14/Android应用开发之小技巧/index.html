@@ -3,21 +3,23 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Tag: StringBuilder类 | Johnny&#39;s Blog</title>
+  <title>Android应用开发之小技巧 | Johnny&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="Android技术博客,Android,个人博客">
   
-  <meta name="description" content="Android技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Johnny&#39;s Blog">
-<meta property="og:url" content="https://www.johnnyit.cn/tags/StringBuilder类/index.html">
+  <meta name="description" content="一、TextView设置可滚动设置TextView可滚动需要两步： 1、配置xml： 123456789&amp;lt;TextView     android:id=&quot;@+id/tv_result&quot;     android:text=&quot;@string/register_now&quot;     android:scrollbars=&quot;vertical&quot;     android:singleLine=&quot;false">
+<meta name="keywords" content="系统控件使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android应用开发之小技巧">
+<meta property="og:url" content="https://www.johnnyit.cn/2017/06/14/Android应用开发之小技巧/index.html">
 <meta property="og:site_name" content="Johnny&#39;s Blog">
-<meta property="og:description" content="Android技术博客">
+<meta property="og:description" content="一、TextView设置可滚动设置TextView可滚动需要两步： 1、配置xml： 123456789&amp;lt;TextView     android:id=&quot;@+id/tv_result&quot;     android:text=&quot;@string/register_now&quot;     android:scrollbars=&quot;vertical&quot;     android:singleLine=&quot;false">
 <meta property="og:locale" content="CN">
+<meta property="og:updated_time" content="2020-08-23T05:48:48.220Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Johnny&#39;s Blog">
-<meta name="twitter:description" content="Android技术博客">
+<meta name="twitter:title" content="Android应用开发之小技巧">
+<meta name="twitter:description" content="一、TextView设置可滚动设置TextView可滚动需要两步： 1、配置xml： 123456789&amp;lt;TextView     android:id=&quot;@+id/tv_result&quot;     android:text=&quot;@string/register_now&quot;     android:scrollbars=&quot;vertical&quot;     android:singleLine=&quot;false">
   
   
     <link rel="icon" href="/logo.png">
@@ -105,57 +107,196 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap">
-  
-  
+        <section id="main" class="body-wrap"><article id="post-Android应用开发之小技巧" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/06/25/String类和StringBuilder类简单分析/" class="archive-article-date">
-  <time datetime="2017-06-24T16:00:00.000Z" itemprop="datePublished">06-25</time>
-</a>
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/25/String类和StringBuilder类简单分析/" target="_blank">String类和StringBuilder类简单分析</a>
+    <h1 class="post-title" itemprop="name">
+      Android应用开发之小技巧
     </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Android应用开发/">Android应用开发</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2017-06-14
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
   
 
-    </header>
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
       
-        <div class="archive-post-footer">
+            
+            <h3 id="一、TextView设置可滚动"><a href="#一、TextView设置可滚动" class="headerlink" title="一、TextView设置可滚动"></a>一、TextView设置可滚动</h3><p>设置TextView可滚动需要两步：</p>
+<p>1、配置xml：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">     <span class="attr">android:id</span>=<span class="string">"@+id/tv_result"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">android:text</span>=<span class="string">"@string/register_now"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">android:scrollbars</span>=<span class="string">"vertical"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">android:singleLine</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">android:maxLines</span>=<span class="string">"10"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>2、代码配置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TextView  tvResult = (TextView) findViewById(R.id.tv_result);</span><br><span class="line">tvResult.setMovementMethod(ScrollingMovementMethod.getInstance());</span><br></pre></td></tr></table></figure>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年08月23日 13:48</p>
+        <p>原始链接： <a class="post-url" href="/2017/06/14/Android应用开发之小技巧/" title="Android应用开发之小技巧">https://www.johnnyit.cn/2017/06/14/Android应用开发之小技巧/</a></p>
+        <footer>
+            <a href="https://www.johnnyit.cn">
+                <img src="/images/logo.png" alt="Johnny">
+                Johnny
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2017/06/14/Android应用开发之小技巧/&title=《Android应用开发之小技巧》 — Johnny's Blog&pic=https://wx2.sbimg.cn/2020/06/25/ArrayList.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.johnnyit.cn/2017/06/14/Android应用开发之小技巧/&title=《Android应用开发之小技巧》 — Johnny's Blog&source=Android技术博客" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.johnnyit.cn/2017/06/14/Android应用开发之小技巧/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android应用开发之小技巧》 — Johnny's Blog&url=https://www.johnnyit.cn/2017/06/14/Android应用开发之小技巧/&via=https://www.johnnyit.cn" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.johnnyit.cn/2017/06/14/Android应用开发之小技巧/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.johnnyit.cn/2017/06/14/Android应用开发之小技巧/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/Java基础/" class="color2">Java基础</a>
-      
-    <a href="/tags/String类/" class="color3">String类</a>
-      
-    <a href="/tags/StringBuilder类/" class="color5">StringBuilder类</a>
+    <a href="/tags/系统控件使用/" class="color2">系统控件使用</a>
       
   </li>
 
-        </div>
-      
+        </ul>
+        
+    </footer>
   </div>
 </article>
 
-  
-  
-    </div></section>
-  
 
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、TextView设置可滚动"><span class="post-toc-text">一、TextView设置可滚动</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2017/06/18/Java深拷贝和浅拷贝浅析/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          Java深拷贝和浅拷贝浅析
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2017/02/17/Hexo+Github/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Hexo+Github搭建个人博客</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
 </section>
         
       </div>
