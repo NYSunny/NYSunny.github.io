@@ -3,23 +3,23 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Android开发实践之通用Dialog封装 | Johnny&#39;s Blog</title>
+  <title>Android应用开发之通用Dialog封装 | Johnny&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="Android技术博客,Android,个人博客">
   
-  <meta name="description" content="前言在日常android开发中，我们会碰到各式各样的Dialog，一般情况下，我们都会封装一个通用的Dialog“壳子”去装不同风格的View，以减少样板代码的书写，今天就来说一说如何封装这个“壳子”。 自定义Dialog主题Android默认的Dialog主题样式会包括标题栏，背景颜色等，这些通常情况下我们都不需要，会影响Dialog的显示效果，我们需要自定义主题把这些属性去掉，主题样式配置如下">
+  <meta name="description" content="一、前言在日常android开发中，我们会碰到各式各样的Dialog，一般情况下，我们都会封装一个通用的Dialog“壳子”去装不同风格的View，以减少样板代码的书写，今天就来说一说如何封装这个“壳子”。 二、自定义Dialog主题Android默认的Dialog主题样式会包括标题栏，背景颜色等，这些通常情况下我们都不需要，会影响Dialog的显示效果，我们需要自定义主题把这些属性去掉，主题样式">
 <meta name="keywords" content="Dialog,android控件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android开发实践之通用Dialog封装">
-<meta property="og:url" content="https://www.johnnyit.cn/2020/01/15/Android开发实践之通用Dialog封装/index.html">
+<meta property="og:title" content="Android应用开发之通用Dialog封装">
+<meta property="og:url" content="https://www.johnnyit.cn/2020/01/15/Android应用开发之通用Dialog封装/index.html">
 <meta property="og:site_name" content="Johnny&#39;s Blog">
-<meta property="og:description" content="前言在日常android开发中，我们会碰到各式各样的Dialog，一般情况下，我们都会封装一个通用的Dialog“壳子”去装不同风格的View，以减少样板代码的书写，今天就来说一说如何封装这个“壳子”。 自定义Dialog主题Android默认的Dialog主题样式会包括标题栏，背景颜色等，这些通常情况下我们都不需要，会影响Dialog的显示效果，我们需要自定义主题把这些属性去掉，主题样式配置如下">
+<meta property="og:description" content="一、前言在日常android开发中，我们会碰到各式各样的Dialog，一般情况下，我们都会封装一个通用的Dialog“壳子”去装不同风格的View，以减少样板代码的书写，今天就来说一说如何封装这个“壳子”。 二、自定义Dialog主题Android默认的Dialog主题样式会包括标题栏，背景颜色等，这些通常情况下我们都不需要，会影响Dialog的显示效果，我们需要自定义主题把这些属性去掉，主题样式">
 <meta property="og:locale" content="CN">
-<meta property="og:updated_time" content="2020-07-04T09:59:16.856Z">
+<meta property="og:updated_time" content="2020-08-23T05:29:53.250Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android开发实践之通用Dialog封装">
-<meta name="twitter:description" content="前言在日常android开发中，我们会碰到各式各样的Dialog，一般情况下，我们都会封装一个通用的Dialog“壳子”去装不同风格的View，以减少样板代码的书写，今天就来说一说如何封装这个“壳子”。 自定义Dialog主题Android默认的Dialog主题样式会包括标题栏，背景颜色等，这些通常情况下我们都不需要，会影响Dialog的显示效果，我们需要自定义主题把这些属性去掉，主题样式配置如下">
+<meta name="twitter:title" content="Android应用开发之通用Dialog封装">
+<meta name="twitter:description" content="一、前言在日常android开发中，我们会碰到各式各样的Dialog，一般情况下，我们都会封装一个通用的Dialog“壳子”去装不同风格的View，以减少样板代码的书写，今天就来说一说如何封装这个“壳子”。 二、自定义Dialog主题Android默认的Dialog主题样式会包括标题栏，背景颜色等，这些通常情况下我们都不需要，会影响Dialog的显示效果，我们需要自定义主题把这些属性去掉，主题样式">
   
   
     <link rel="icon" href="/logo.png">
@@ -107,14 +107,14 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-Android开发实践之通用Dialog封装" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-Android应用开发之通用Dialog封装" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      Android开发实践之通用Dialog封装
+      Android应用开发之通用Dialog封装
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -122,7 +122,7 @@
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/android控件使用/">android控件使用</a>
+                      <a href="/categories/Android应用开发/">Android应用开发</a>
                   
               </li>
           
@@ -143,10 +143,10 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在日常android开发中，我们会碰到各式各样的<code>Dialog</code>，一般情况下，我们都会封装一个通用的<code>Dialog</code>“壳子”去装不同风格的View，以减少样板代码的书写，今天就来说一说如何封装这个“壳子”。</p>
-<h2 id="自定义Dialog主题"><a href="#自定义Dialog主题" class="headerlink" title="自定义Dialog主题"></a>自定义Dialog主题</h2><p>Android默认的Dialog主题样式会包括标题栏，背景颜色等，这些通常情况下我们都不需要，会影响Dialog的显示效果，我们需要自定义主题把这些属性去掉，主题样式配置如下：</p>
+            <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>在日常android开发中，我们会碰到各式各样的<code>Dialog</code>，一般情况下，我们都会封装一个通用的<code>Dialog</code>“壳子”去装不同风格的View，以减少样板代码的书写，今天就来说一说如何封装这个“壳子”。</p>
+<h3 id="二、自定义Dialog主题"><a href="#二、自定义Dialog主题" class="headerlink" title="二、自定义Dialog主题"></a>二、自定义Dialog主题</h3><p>Android默认的Dialog主题样式会包括标题栏，背景颜色等，这些通常情况下我们都不需要，会影响Dialog的显示效果，我们需要自定义主题把这些属性去掉，主题样式配置如下：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"BaseDialogTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.Dialog"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowFrame"</span>&gt;</span>@null<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsFloating"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:backgroundDimEnabled"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="封装Dialog"><a href="#封装Dialog" class="headerlink" title="封装Dialog"></a>封装Dialog</h2><p>Dialog的封装方式有很多种，可以继承<code>Dialog</code>或者<code>AppCompatDialog</code>类进行封装，又或者直接封装一个Dialog相关的工具类，今天我们尝试封装一个Dialog相关的工具类。</p>
+<h3 id="三、封装Dialog"><a href="#三、封装Dialog" class="headerlink" title="三、封装Dialog"></a>三、封装Dialog</h3><p>Dialog的封装方式有很多种，可以继承<code>Dialog</code>或者<code>AppCompatDialog</code>类进行封装，又或者直接封装一个Dialog相关的工具类，今天我们尝试封装一个Dialog相关的工具类。</p>
 <p>代码示例如下：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DialogUtils.kt</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@JvmOverloads</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">createDialog</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    context: <span class="type">Context</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    layoutResId: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    isCanceled: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    gravity: <span class="type">Int</span> = Gravity.CENTER,</span></span></span><br><span class="line"><span class="function"><span class="params">    style: <span class="type">Int</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    block: (<span class="type">AppCompatDialog</span>.()</span></span> -&gt; <span class="built_in">Unit</span>)? = <span class="literal">null</span></span><br><span class="line">): AppCompatDialog = AppCompatDialog(context, R.style.BaseDialogTheme).also &#123; dialog -&gt;</span><br><span class="line">    dialog.setContentView(layoutResId)</span><br><span class="line">    dialog.setCanceledOnTouchOutside(isCanceled)</span><br><span class="line">    <span class="keyword">val</span> window = dialog.window</span><br><span class="line">    <span class="keyword">val</span> layoutParams = window?.attributes</span><br><span class="line">    layoutParams?.width = ViewGroup.LayoutParams.MATCH_PARENT</span><br><span class="line">    layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT</span><br><span class="line">    layoutParams?.gravity = gravity</span><br><span class="line">    window?.attributes = layoutParams</span><br><span class="line">    style?.let &#123; window?.setWindowAnimations(it) &#125;</span><br><span class="line">    block?.let &#123; it(dialog) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@JvmOverloads</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">showDialog</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    context: <span class="type">Context</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    layoutResId: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    isCanceled: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    gravity: <span class="type">Int</span> = Gravity.CENTER,</span></span></span><br><span class="line"><span class="function"><span class="params">    style: <span class="type">Int</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    block: (<span class="type">AppCompatDialog</span>.()</span></span> -&gt; <span class="built_in">Unit</span>)? = <span class="literal">null</span></span><br><span class="line">): AppCompatDialog = createDialog(context, layoutResId, isCanceled, gravity, style, block).apply &#123;</span><br><span class="line">    show()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>封装要点：</p>
@@ -157,12 +157,12 @@
 <li>Dialog进出动画可配置</li>
 </ul>
 <p>一般达到上面四点要求之后就能满足大多数样式的Dialog。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这篇文章仅给出通用Dialog封装的示例，具体该如何封装还需根据项目需要来进行。</p>
+<h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><p>这篇文章仅给出通用Dialog封装的示例，具体该如何封装还需根据项目需要来进行。</p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年07月04日 17:59</p>
-        <p>原始链接： <a class="post-url" href="/2020/01/15/Android开发实践之通用Dialog封装/" title="Android开发实践之通用Dialog封装">https://www.johnnyit.cn/2020/01/15/Android开发实践之通用Dialog封装/</a></p>
+        <p>最后更新： 2020年08月23日 13:29</p>
+        <p>原始链接： <a class="post-url" href="/2020/01/15/Android应用开发之通用Dialog封装/" title="Android应用开发之通用Dialog封装">https://www.johnnyit.cn/2020/01/15/Android应用开发之通用Dialog封装/</a></p>
         <footer>
             <a href="https://www.johnnyit.cn">
                 <img src="/images/logo.png" alt="Johnny">
@@ -219,7 +219,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2020/01/15/Android开发实践之通用Dialog封装/&title=《Android开发实践之通用Dialog封装》 — Johnny's Blog&pic=https://wx1.sbimg.cn/2020/07/02/2Z9XA.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.johnnyit.cn/2020/01/15/Android应用开发之通用Dialog封装/&title=《Android应用开发之通用Dialog封装》 — Johnny's Blog&pic=https://wx1.sbimg.cn/2020/07/02/2Z9XA.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -229,22 +229,22 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.johnnyit.cn/2020/01/15/Android开发实践之通用Dialog封装/&title=《Android开发实践之通用Dialog封装》 — Johnny's Blog&source=Android技术博客" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.johnnyit.cn/2020/01/15/Android应用开发之通用Dialog封装/&title=《Android应用开发之通用Dialog封装》 — Johnny's Blog&source=Android技术博客" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.johnnyit.cn/2020/01/15/Android开发实践之通用Dialog封装/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.johnnyit.cn/2020/01/15/Android应用开发之通用Dialog封装/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android开发实践之通用Dialog封装》 — Johnny's Blog&url=https://www.johnnyit.cn/2020/01/15/Android开发实践之通用Dialog封装/&via=https://www.johnnyit.cn" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android应用开发之通用Dialog封装》 — Johnny's Blog&url=https://www.johnnyit.cn/2020/01/15/Android应用开发之通用Dialog封装/&via=https://www.johnnyit.cn" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.johnnyit.cn/2020/01/15/Android开发实践之通用Dialog封装/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.johnnyit.cn/2020/01/15/Android应用开发之通用Dialog封装/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -254,7 +254,7 @@
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.johnnyit.cn/2020/01/15/Android开发实践之通用Dialog封装/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.johnnyit.cn/2020/01/15/Android应用开发之通用Dialog封装/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -281,7 +281,7 @@
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自定义Dialog主题"><span class="post-toc-text">自定义Dialog主题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#封装Dialog"><span class="post-toc-text">封装Dialog</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、自定义Dialog主题"><span class="post-toc-text">二、自定义Dialog主题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、封装Dialog"><span class="post-toc-text">三、封装Dialog</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、总结"><span class="post-toc-text">四、总结</span></a></li></ol>
         </nav>
     </aside>
     
